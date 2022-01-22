@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { LoginService } from './login.service';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateLoginDto } from './dto/create-login.dot';
 
+@ApiTags('登录')
 @Controller('login')
 export class LoginController {
   constructor(private readonly service: LoginService) {}
