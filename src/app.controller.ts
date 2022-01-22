@@ -1,5 +1,4 @@
 import { Controller, Get, Inject, Post, Put } from '@nestjs/common';
-import { AppService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
@@ -9,7 +8,6 @@ import { Logger } from 'winston';
 export class AppController {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
-    private readonly appService: AppService,
   ) {}
 
   @Get('hello')

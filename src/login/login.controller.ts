@@ -1,23 +1,44 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { LoginService } from './login.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CreateLoginDto } from './dto/create-login.dot';
+import { UserService } from '../user/user.service';
+import { AuthService } from '../auth/auth.service';
 
 @ApiTags('登录')
 @Controller('login')
 export class LoginController {
-  constructor(private readonly service: LoginService) {}
+  constructor(
+    private readonly service: LoginService,
+    private readonly authService: AuthService,
+    private readonly usersService: UserService,
+  ) {}
 
-  @ApiOperation({ summary: '登录' })
+  // JWT验证 - Step 1: 用户请求登录
   @Post('login')
-  login(@Body() post: CreateLoginDto): string {
-    console.log(post);
-    return this.service.getHello();
+  async login(@Body() loginParmas: any) {
+    console.log('JWT验证 - Step 1: 用户请求登录');
+    const authResult = await this.authService.validateUser(
+      loginParmas.username,
+      loginParmas.password,
+    );
+    switch (authResult.code) {
+      case 1:
+        return this.authService.certificate(authResult.user);
+      case 2:
+        return {
+          code: 600,
+          msg: `账号或密码不正确`,
+        };
+      default:
+        return {
+          code: 600,
+          msg: `查无此人`,
+        };
+    }
   }
 
-  @ApiOperation({ summary: '获取登录信息' })
-  @Get('getInfo')
-  getLoginInfo(@Query() post: CreateLoginDto): string {
-    return this.service.getHello();
+  @Post('register')
+  async register(@Body() body: any) {
+    return await this.usersService.register(body);
   }
 }
