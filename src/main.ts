@@ -6,27 +6,25 @@ import { HttpExceptionFilter } from './core/filter/http-exception.filter';
 import { TransformInterceptor } from './core/interceptor/transform.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-
-import * as express from 'express';
 import { join } from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {});
   // app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
 
   // 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
-  const rootDir = join(__dirname, '..');
-  app.use('/public', express.static(join(rootDir, 'public')));
-  // app.useStaticAssets(join(rootDir, 'public'));
+  const root = join(__dirname, '..');
+  // app.use('/public', express.static(join(rootDir, 'public')));
+  app.useStaticAssets(join(root, 'public'), { prefix: '/public' });
 
   // 设置swagger文档
   const config = new DocumentBuilder()
-    .setTitle('管理后台')
-    .setDescription('管理后台接口文档')
-    .setVersion('1.0')
+    .setTitle('接口文档')
+    .setDescription('接口文档描述')
+    .setVersion('1.1')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
