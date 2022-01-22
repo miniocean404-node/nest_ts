@@ -1,13 +1,4 @@
-const env = process.env.NODE_ENV;
 const path = require('path');
-
-const resolve = (p) => {
-  if (env === 'production') {
-    path.join('dist', p);
-  } else {
-    return p;
-  }
-};
 
 module.exports = {
   type: 'mysql',
@@ -17,12 +8,12 @@ module.exports = {
   password: 'root',
   database: 'user',
   synchronize: true,
-  timezone: 'UTC',
+  // timezone: 'UTC',
   logging: false,
   multipleStatements: true,
   dropSchema: false,
-  entities: [resolve('src/model/*.{ts,js}')],
+  entities: ['dist/**/*.entity{.ts,.js}'],
   cli: {
-    entitiesDir: resolve('src/model'),
+    entitiesDir: 'dist/core/db',
   },
 };

@@ -11,23 +11,23 @@ export class HttpExceptionFilter<T extends HttpException>
 {
   catch(exception: T, host: ArgumentsHost): any {
     const ctx = host.switchToHttp(); // 获取请求上下文
-    const response = ctx.getResponse(); // 获取请求上下文中的 response对象
+    const res = ctx.getResponse(); // 获取请求上下文中的 response对象
     const status = exception.getStatus(); // 获取异常状态码
 
     // 设置错误信息
-    const message = exception.message
+    const msg = exception.message
       ? exception.message
-      : `${status >= 500 ? 'Service Error' : 'Client Error'}`;
+      : `${status >= 500 ? '服务器错误' : '客户端错误'}`;
 
     const errorResponse = {
       data: {},
-      message: message,
+      message: msg,
       code: -1,
     };
 
     // 设置返回的状态码， 请求头，发送错误信息
-    response.status(status);
-    response.header('Content-Type', 'application/json; charset=utf-8');
-    response.send(errorResponse);
+    res.status(status);
+    res.header('Content-Type', 'application/json; charset=utf-8');
+    res.send(errorResponse);
   }
 }

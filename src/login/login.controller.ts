@@ -9,13 +9,14 @@ export class LoginController {
   constructor(private readonly service: LoginService) {}
 
   @ApiOperation({ summary: '登录' })
-  @Post('article')
+  @Post('login')
   login(@Body() post: CreateLoginDto): string {
+    console.log(post);
     return this.service.getHello();
   }
 
   @ApiOperation({ summary: '获取登录信息' })
-  @Get('article')
+  @Get('getInfo')
   getLoginInfo(@Query() post: CreateLoginDto): string {
     return this.service.getHello();
   }
