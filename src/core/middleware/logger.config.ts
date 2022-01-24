@@ -4,8 +4,8 @@
 // 字体背景颜色：black,red,green,yellow,blue, magenta,cyan,white,gray,grey
 // 背景颜色：blackBG,redBG,greenBG,yellowBG,blueBG,magentaBG,cyanBG,whiteBG
 
-import { createLogger, format, transports, addColors } from 'winston';
-import 'winston-daily-rotate-file';
+import { createLogger, format, transports, addColors } from 'winston'
+import 'winston-daily-rotate-file'
 
 const myCustomLevels = {
   levels: {
@@ -26,7 +26,7 @@ const myCustomLevels = {
     debug: 'green',
     silly: 'green',
   },
-};
+}
 
 const customFormat = format.combine(
   format.json(),
@@ -40,7 +40,7 @@ const customFormat = format.combine(
       }`,
   ),
   // format.prettyPrint(),
-);
+)
 
 const defaultOptions = {
   format: customFormat,
@@ -48,9 +48,9 @@ const defaultOptions = {
   zippedArchive: true,
   maxSize: '20m',
   maxFiles: '14d',
-};
+}
 
-addColors(myCustomLevels.colors);
+addColors(myCustomLevels.colors)
 
 // 可以创建多个日志打印器
 export default {
@@ -90,4 +90,4 @@ export default {
     new transports.File({ filename: 'logs/other/exceptions.log' }),
   ],
   // rejectionHandlers: [new transports.File({ filename: 'logs/other/reject.log' })], //处理未经批准的拒绝承诺,
-};
+}

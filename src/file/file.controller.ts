@@ -4,13 +4,13 @@ import {
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
-} from '@nestjs/common';
+} from '@nestjs/common'
 import {
   AnyFilesInterceptor,
   FileFieldsInterceptor,
   FileInterceptor,
-} from '@nestjs/platform-express';
-import { ApiTags } from '@nestjs/swagger';
+} from '@nestjs/platform-express'
+import { ApiTags } from '@nestjs/swagger'
 
 @ApiTags('文件上传')
 @Controller('file')
@@ -19,7 +19,7 @@ export class FileController {
   @UseInterceptors(FileInterceptor('file1'))
   singleFile(@UploadedFile() file: Express.Multer.File) {
     // 这里的 file 已经是保存后的文件信息了，在此处做数据库处理，或者直接返回保存后的文件信息
-    return file;
+    return file
   }
 
   @Post('array')
@@ -32,16 +32,16 @@ export class FileController {
   arrayFile(
     @UploadedFiles()
     file: {
-      file1?: Express.Multer.File[];
-      file2?: Express.Multer.File[];
+      file1?: Express.Multer.File[]
+      file2?: Express.Multer.File[]
     },
   ) {
-    return file;
+    return file
   }
 
   @Post('any')
   @UseInterceptors(AnyFilesInterceptor())
   anyFile(@UploadedFiles() file: Array<Express.Multer.File>) {
-    return file;
+    return file
   }
 }

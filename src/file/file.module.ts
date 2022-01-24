@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { FileController } from './file.controller';
-import { FileService } from './file.service';
-import { MulterModule } from '@nestjs/platform-express';
-import dayjs = require('dayjs');
-import { diskStorage } from 'multer';
-import { nanoid } from 'nanoid';
+import { Module } from '@nestjs/common'
+import { FileController } from './file.controller'
+import { FileService } from './file.service'
+import { MulterModule } from '@nestjs/platform-express'
+import dayjs = require('dayjs')
+import { diskStorage } from 'multer'
+import { nanoid } from 'nanoid'
 
 @Module({
   imports: [
@@ -17,8 +17,8 @@ import { nanoid } from 'nanoid';
         destination: `./public/upload/${dayjs().format('YYYY-MM-DD')}`,
         filename: (req, file, cb) => {
           // 在此处自定义保存后的文件名称
-          const filename = `${nanoid()}.${file.mimetype.split('/')[1]}`;
-          return cb(null, filename);
+          const filename = `${nanoid()}.${file.mimetype.split('/')[1]}`
+          return cb(null, filename)
         },
       }),
     }),

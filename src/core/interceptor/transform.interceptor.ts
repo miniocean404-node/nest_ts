@@ -3,8 +3,8 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from '@nestjs/common';
-import { Observable, map } from 'rxjs';
+} from '@nestjs/common'
+import { Observable, map } from 'rxjs'
 
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
@@ -15,8 +15,8 @@ export class TransformInterceptor implements NestInterceptor {
           data,
           code: code || 0,
           msg: msg || '请求成功',
-        };
+        }
       }),
-    );
+    )
   }
 }
