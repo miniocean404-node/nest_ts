@@ -5,8 +5,8 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true, //可以导入export = {} 模块
+    "esModuleInterop": true, // 可以使用import 导入commonjs模块
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",

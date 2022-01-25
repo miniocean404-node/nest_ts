@@ -7,6 +7,7 @@ import { TransformInterceptor } from './core/interceptor/transform.interceptor'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import rateLimit from 'express-rate-limit'
+const cookieParser = require('cookie-parser')
 import csrf from 'csurf'
 import helmet from 'helmet'
 import { join } from 'path'
@@ -16,6 +17,7 @@ async function bootstrap() {
 
   app.use(
     helmet(), // 通过适当地设置 HTTP 头，Helmet 可以帮助保护您的应用免受一些众所周知的 Web 漏洞的影响。
+    cookieParser(),
     csrf({ cookie: true }), // CSRF保护
     // 为了保护您的应用程序免受暴力攻击，您必须实现某种速率限制
     rateLimit({
