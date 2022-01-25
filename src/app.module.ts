@@ -19,6 +19,7 @@ import { ExampleModule } from './example/example.module'
     UserModule,
     AuthModule,
     ExampleModule,
+    LoginModule,
   ], // 导入其他模块中导出的Providers，这些模块导出了此模块中所需提供者，以实现共享
   controllers: [AppController, UserController], // 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应，将具体业务逻辑委托给providers处理
   providers: [], // 注入器实例化的提供者（服务提供者），处理具体的业务逻辑，模块内共享使用；
