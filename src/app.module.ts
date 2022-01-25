@@ -1,14 +1,13 @@
-import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { UserModule } from './user/user.module'
-import { LoginModule } from './login/login.module'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { FileModule } from './file/file.module'
-import { WinstonModule } from 'nest-winston'
-import { AuthModule } from './auth/auth.module'
-import WinstonConfig from './core/middleware/logger.config'
-import { UserController } from './user/user.controller'
-import { ExampleModule } from './example/example.module'
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { UserModule } from "./user/user.module";
+import { LoginModule } from "./login/login.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { FileModule } from "./file/file.module";
+import { WinstonModule } from "nest-winston";
+import { AuthModule } from "./auth/auth.module";
+import WinstonConfig from "./core/middleware/logger.config";
+import { ExampleModule } from "./example/example.module";
 
 // 根模块
 @Module({
@@ -20,9 +19,9 @@ import { ExampleModule } from './example/example.module'
     LoginModule,
     AuthModule,
     ExampleModule,
-  ], // 导入其他模块中导出的Providers，这些模块导出了此模块中所需提供者，以实现共享
-  controllers: [AppController], // 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应，将具体业务逻辑委托给providers处理
-  providers: [], // 注入器实例化的提供者（服务提供者），处理具体的业务逻辑，模块内共享使用；
-  exports: [], // 导出其他模块需要共享的Providers
+  ], // 导入其他模块中导出的providers，这些模块导出了此模块中所需provider，以实现共享
+  exports: [], // 导出其他模块需要共享的Providers(包含其构造函数引用的)
+  controllers: [AppController], // 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应(按构造函数循序写)
+  providers: [], // 注入器(inject)实例化的提供者（服务提供者,给controllers提供），处理具体的业务逻辑，模块内共享使用；
 })
 export class AppModule {}

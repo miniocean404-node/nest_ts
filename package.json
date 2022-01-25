@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "create-moudle": "nest g mo posts",
     "create-controller": "nest g co posts",
-    "create-service": "nest g service posts",
+    "create-service": "nest g s posts",
     "create-filter": "nest g filter core/filter/http-exception",
     "create-interceptor": "nest g interceptor core/interceptor/transform",
     "create-middleware": " nest g middleware logger middleware"

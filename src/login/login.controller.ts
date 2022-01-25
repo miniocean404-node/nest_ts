@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common'
+import { Body, Controller, Post } from '@nestjs/common'
 import { LoginService } from './login.service'
-import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { ApiTags } from '@nestjs/swagger'
 import { UserService } from '../user/user.service'
 import { AuthService } from '../auth/auth.service'
 
@@ -23,7 +23,7 @@ export class LoginController {
     )
     switch (authResult.code) {
       case 1:
-        return this.authService.certificate(authResult.user)
+      // return this.authService.certificate(authResult.user)
       case 2:
         return {
           code: 600,
