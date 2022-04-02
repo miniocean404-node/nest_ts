@@ -8,7 +8,6 @@ import { PassportModule } from '@nestjs/passport'
 import { UserService } from '../user/user.service'
 
 @Module({
-  providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
@@ -16,6 +15,7 @@ import { UserService } from '../user/user.service'
       signOptions: { expiresIn: '8h' }, // token 过期时效
     }),
   ],
+  providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

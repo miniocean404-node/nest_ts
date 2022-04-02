@@ -3,10 +3,7 @@ import { encryptPassword, makeSalt } from '../../utils/cryptogram'
 
 @Injectable()
 export class UserService {
-  /**
-   * 查询是否有该用户
-   * @param username 用户名
-   */
+  // 查询是否有该用户
   async findOne(username: string): Promise<any | undefined> {
     try {
       return 'user'
@@ -16,10 +13,7 @@ export class UserService {
     }
   }
 
-  /**
-   * 注册
-   * @param requestBody 请求体
-   */
+  // 注册
   async register(requestBody: any): Promise<any> {
     const { accountName, realName, password, rePassword, mobile } = requestBody
 

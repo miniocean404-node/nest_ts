@@ -9,17 +9,17 @@ import { AuthService } from '../auth/auth.service'
 export class LoginController {
   constructor(
     private readonly service: LoginService,
-    private readonly authService: AuthService,
     private readonly usersService: UserService,
+    private readonly authService: AuthService,
   ) {}
 
   // JWT验证 - Step 1: 用户请求登录
   @Post('login')
-  async login(@Body() loginParmas: any) {
+  async login(@Body() loginParma: any) {
     console.log('JWT验证 - Step 1: 用户请求登录')
     const authResult = await this.authService.validateUser(
-      loginParmas.username,
-      loginParmas.password,
+      loginParma.username,
+      loginParma.password,
     )
     switch (authResult.code) {
       case 1:
