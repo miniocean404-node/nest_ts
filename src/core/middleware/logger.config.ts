@@ -4,16 +4,9 @@
 // 字体背景颜色：black,red,green,yellow,blue, magenta,cyan,white,gray,grey
 // 背景颜色：blackBG,redBG,greenBG,yellowBG,blueBG,magentaBG,cyanBG,whiteBG
 
-import {
-  createLogger,
-  format,
-  transports,
-  addColors,
-  LoggerOptions,
-} from 'winston'
+import { createLogger, format, transports, addColors } from 'winston'
 import 'winston-daily-rotate-file'
 
-// 自定义日志等级颜色
 const myCustomLevels = {
   levels: {
     error: 0,
@@ -35,9 +28,6 @@ const myCustomLevels = {
   },
 }
 
-addColors(myCustomLevels.colors)
-
-// 自定义格式化信息
 const customFormat = format.combine(
   format.json(),
   format.label({ label: `运行环境:dev` }),
@@ -60,13 +50,15 @@ const defaultOptions = {
   maxFiles: '14d',
 }
 
-const customConfig: LoggerOptions = {
+addColors(myCustomLevels.colors)
+
+// 可以创建多个日志打印器
+export default {
   level: 'info',
   levels: myCustomLevels.levels,
   format: customFormat,
   silent: false, // 是否禁用所有日志
   transports: [
-    // 自定义控制台信息
     new transports.Console({
       level: 'info',
       format: format.combine(
@@ -80,7 +72,6 @@ const customConfig: LoggerOptions = {
       ),
       // level: 'warn',
     }),
-    // 自定义文件输出配置
     new transports.DailyRotateFile({
       // handleExceptions:true //处理异常
       // handleRejections:true //处理未经批准的拒绝承诺
@@ -100,6 +91,3 @@ const customConfig: LoggerOptions = {
   ],
   // rejectionHandlers: [new transports.File({ filename: 'logs/other/reject.log' })], //处理未经批准的拒绝承诺,
 }
-
-// 可以创建多个日志打印器
-export default customConfig
