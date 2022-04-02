@@ -11,7 +11,7 @@ import WinstonConfig from './core/middleware/logger.config'
 // 根模块
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    // TypeOrmModule.forRoot(),
     WinstonModule.forRoot(WinstonConfig),
     FileModule,
     UserModule,

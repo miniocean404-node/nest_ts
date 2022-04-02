@@ -10,8 +10,6 @@ export class AppController {
   @Inject(WINSTON_MODULE_PROVIDER)
   private readonly logger: Logger
 
-  constructor() {}
-
   @Get('hello')
   helloApp() {
     this.logger.info(`header/menu -> ${JSON.stringify(1)}`)
