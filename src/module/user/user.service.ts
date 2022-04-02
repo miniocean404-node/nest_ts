@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { encryptPassword, makeSalt } from '../utils/cryptogram'
+import { encryptPassword, makeSalt } from '../../utils/cryptogram'
 
 @Injectable()
 export class UserService {
