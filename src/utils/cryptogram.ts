@@ -1,5 +1,9 @@
 import * as crypto from 'crypto'
+// 加密解密工具
 
+/**
+ * 加密盐
+ */
 export function makeSalt(): string {
   return crypto.randomBytes(3).toString('base64')
 }
