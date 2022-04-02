@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { UserModule } from './module/user/user.module'
-import { LoginModule } from './module/login/login.module'
+
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { FileModule } from './module/file/file.module'
 import { WinstonModule } from 'nest-winston'
-import { AuthModule } from './module/auth/auth.module'
 import WinstonConfig from './core/middleware/logger.config'
-import { ExampleModule } from './module/example/example.module'
+
+import { AppController } from './app.controller'
+import { LoginModule } from '@/module/login/login.module'
+import { AuthModule } from '@/module/auth/auth.module'
+import { UserModule } from '@/module/user/user.module'
+import { FileModule } from '@/module/file/file.module'
+import { ExampleModule } from '@/module/example/example.module'
 
 // 根模块
 @Module({

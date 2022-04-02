@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*":["src/*"]
+    },
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -9,14 +14,13 @@
     "esModuleInterop": true, // 可以使用import 导入commonjs模块
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+
   }
 }

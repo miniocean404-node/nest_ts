@@ -1,9 +1,5 @@
-// AngularJS、Spring和Nest.js都是基于控制反转原则设计的,而且都使用了依赖注入的方式来解决解耦问题。
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
-import { AppModule } from './app.module'
-import { HttpExceptionFilter } from './core/filter/http-exception.filter'
-import { TransformInterceptor } from './core/interceptor/transform.interceptor'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 
@@ -13,6 +9,10 @@ import csrf from 'csurf'
 import helmet from 'helmet'
 
 import { join } from 'path'
+
+import { AppModule } from './app.module'
+import { HttpExceptionFilter } from '@/core/filter/http-exception.filter'
+import { TransformInterceptor } from '@/core/interceptor/transform.interceptor'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {})

@@ -1,18 +1,22 @@
 import { Module } from '@nestjs/common'
+import { expiresIn, secret } from '@/config/jwt-constants'
+import { JwtModule } from '@nestjs/jwt'
+import { PassportModule } from '@nestjs/passport'
+
+// 本文件夹
 import { AuthService } from './auth.service'
 import { JwtStrategy } from './jwt.strategy'
-import { jwtConstants } from './constants'
-import { JwtModule } from '@nestjs/jwt'
 import { LocalStrategy } from './local.strategy'
-import { PassportModule } from '@nestjs/passport'
-import { UserService } from '../user/user.service'
+
+// 其他模块
+import { UserService } from '@/module/user/user.service'
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '8h' }, // token 过期时效
+      secret: secret,
+      signOptions: { expiresIn }, // token 过期时效
     }),
   ],
   providers: [AuthService, UserService, LocalStrategy, JwtStrategy],

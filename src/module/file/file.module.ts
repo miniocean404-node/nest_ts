@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common'
+import { MulterModule } from '@nestjs/platform-express'
+
+// 文件上传
+import { diskStorage } from 'multer'
+import dayjs = require('dayjs')
+import { nanoid } from 'nanoid'
+
 import { FileController } from './file.controller'
 import { FileService } from './file.service'
-import { MulterModule } from '@nestjs/platform-express'
-import dayjs = require('dayjs')
-import { diskStorage } from 'multer'
-import { nanoid } from 'nanoid'
 
 @Module({
   imports: [
