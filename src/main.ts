@@ -7,7 +7,7 @@ import { TransformInterceptor } from './core/interceptor/transform.interceptor'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import rateLimit from 'express-rate-limit'
-const cookieParser = require('cookie-parser')
+import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
 import helmet from 'helmet'
 import { join } from 'path'
