@@ -16,7 +16,7 @@ import { ExampleModule } from '@/module/example/example.module'
 	// imports 导入模块相当于导入这个模块所有的（包括这个模块导入的其他模块 包括：providers、imports）
 	imports: [
 		// 数据库连接
-		// TypeOrmModule.forRoot(),
+		TypeOrmModule.forRoot(),
 		WinstonModule.forRoot(WinstonConfig),
 		LoginModule,
 		AuthModule,

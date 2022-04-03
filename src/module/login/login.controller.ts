@@ -18,6 +18,7 @@ export class LoginController {
 	@Post('login')
 	async login(@Body() loginParma: any) {
 		console.log('JWT验证 - Step 1: 用户请求登录')
+
 		const authResult = await this.authService.validateUser(loginParma.username, loginParma.password)
 		switch (authResult.code) {
 			case 1:
@@ -29,7 +30,7 @@ export class LoginController {
 				}
 			default:
 				return {
-					code: 600,
+					code: 500,
 					msg: `查无此人`,
 				}
 		}

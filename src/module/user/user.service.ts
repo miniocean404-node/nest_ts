@@ -9,8 +9,7 @@ export class UserService {
 		try {
 			return 'user'
 		} catch (error) {
-			console.error(error)
-			return void 0
+			return console.error(error)
 		}
 	}
 
