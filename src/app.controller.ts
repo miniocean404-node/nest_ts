@@ -12,7 +12,8 @@ export class AppController {
 
 	@Get('hello')
 	helloApp() {
-		this.logger.info(`header/menu -> ${JSON.stringify(1)}`)
+		this.logger.info(`日志 -> ${JSON.stringify(1)}`)
 		return 'hello app'
 	}
 }
+

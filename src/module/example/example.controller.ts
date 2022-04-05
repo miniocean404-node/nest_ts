@@ -3,7 +3,6 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { CreateTestDto } from './dto/create-example.dot'
 import { ExampleService } from './example.service'
-import { Example2Service } from './example2.service'
 
 ApiTags('例子')
 @Controller('example')
