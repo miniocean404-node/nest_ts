@@ -8,7 +8,7 @@ export class TransformInterceptor implements NestInterceptor {
 			map(({ data, msg, code }) => {
 				return {
 					data,
-					code: code || 0,
+					code: code || 200,
 					msg: msg || '请求成功',
 				}
 			})
