@@ -1,8 +1,7 @@
+import { AuthService } from '@/module/auth/auth.service'
+import { UserService } from '@/module/user/user.service'
 import { Body, Controller, Post } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-
-import { UserService } from '@/module/user/user.service'
-import { AuthService } from '@/module/auth/auth.service'
 import { LoginService } from './login.service'
 
 @ApiTags('登录')

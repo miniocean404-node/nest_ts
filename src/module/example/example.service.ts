@@ -1,4 +1,4 @@
-import { Inject, Injectable, Scope } from '@nestjs/common'
+import { Injectable, Scope } from '@nestjs/common'
 
 // 一般情况下，Provider都有着同应用程序一样的生命周期（根据依赖关系逐个生成，请求完成后再一并销毁）。但是也可以通过一些其他方法来延申其作用域。Nest提供三种周期：
 // https://juejin.cn/post/6923020519113490440

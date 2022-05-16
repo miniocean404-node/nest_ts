@@ -1,6 +1,5 @@
 import { Body, Controller, Get, Inject, Post, Put, Query } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
-
 import { CreateTestDto } from './dto/create-example.dot'
 import { ExampleService } from './example.service'
 

@@ -13,7 +13,7 @@ export class HttpExceptionFilter<T extends HttpException> implements ExceptionFi
 		const errorResponse = {
 			data: {},
 			message: msg,
-			code: -1,
+			code: status,
 		}
 
 		// 设置返回的状态码， 请求头，发送错误信息

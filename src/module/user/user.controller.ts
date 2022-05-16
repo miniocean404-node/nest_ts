@@ -1,7 +1,6 @@
-import { Body, Controller, Inject, Post, UseGuards } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+import { Body, Controller, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-
+import { ApiTags } from '@nestjs/swagger'
 import { UserService } from './user.service'
 
 @ApiTags('用户')
