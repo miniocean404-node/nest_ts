@@ -1,18 +1,15 @@
-import { NestFactory } from '@nestjs/core'
-import { NestExpressApplication } from '@nestjs/platform-express'
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
-import { ValidationPipe } from '@nestjs/common'
-
-import rateLimit from 'express-rate-limit'
-import cookieParser from 'cookie-parser'
-import csrf from 'csurf'
-import helmet from 'helmet'
-
-import { join } from 'path'
-
-import { AppModule } from './app.module'
 import { HttpExceptionFilter } from '@/core/filter/http-exception.filter'
 import { TransformInterceptor } from '@/core/interceptor/transform.interceptor'
+import { ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { NestExpressApplication } from '@nestjs/platform-express'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import cookieParser from 'cookie-parser'
+import csrf from 'csurf'
+import rateLimit from 'express-rate-limit'
+import helmet from 'helmet'
+import { join } from 'path'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule, {})
@@ -24,9 +21,9 @@ async function bootstrap() {
 		// 为了保护您的应用程序免受暴力攻击，您必须实现某种速率限制
 		rateLimit({
 			windowMs: 15 * 60 * 1000, // 15 minutes
-			max: 100, // limit each IP to 100 requests per windowMs
-			standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-			legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+			max: 100, // 将每个 IP 限制为每个窗口 1Ms 100 个请求
+			standardHeaders: true, // 在 `RateLimit-*` 头中返回速率限制信息
+			legacyHeaders: false, // 禁用 `X-RateLimit-*` 头
 		})
 	)
 
@@ -40,6 +37,7 @@ async function bootstrap() {
 		credentials: true,
 		maxAge: 3000,
 	})
+
 	app.useGlobalPipes(new ValidationPipe())
 	app.useGlobalFilters(new HttpExceptionFilter())
 	app.useGlobalInterceptors(new TransformInterceptor())
@@ -61,6 +59,7 @@ async function bootstrap() {
 
 	await app.listen(3000)
 	console.log('http://localhost:3000')
+	console.log('接口文档:http://localhost:3000/doc')
 }
 
 bootstrap().then()
