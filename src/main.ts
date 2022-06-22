@@ -58,7 +58,7 @@ async function bootstrap() {
 	SwaggerModule.setup('doc', app, document)
 
 	await app.listen(3000)
-	console.log('http://localhost:3000')
+	console.log('http://localhost:3000/api/v1')
 	console.log('接口文档:http://localhost:3000/doc')
 }
 
