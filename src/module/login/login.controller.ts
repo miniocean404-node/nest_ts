@@ -19,6 +19,7 @@ export class LoginController {
 		console.log('JWT验证 - Step 1: 用户请求登录')
 
 		const authResult = await this.authService.validateUser(loginParma.username, loginParma.password)
+
 		switch (authResult.code) {
 			case 1:
 			// return this.authService.certificate(authResult.user)

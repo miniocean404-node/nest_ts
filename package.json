@@ -22,14 +22,15 @@
 		"create-moudle": "nest g mo module/posts",
 		"create-controller": "nest g co module/posts",
 		"create-service": "nest g s module/posts",
-		"create-filter": "nest g filter core/filter/http-exception",
-		"create-interceptor": "nest g interceptor core/interceptor/transform",
+		"create-filter": "nest g filter global/filter/http-exception",
+		"create-interceptor": "nest g interceptor global/interceptor/transform",
 		"create-middleware": " nest g middleware logger middleware"
 	},
 	"dependencies": {
 		"@nestjs/common": "^8.4.6",
 		"@nestjs/core": "^8.4.6",
 		"@nestjs/platform-express": "^8.4.6",
+		"body-parser": "^1.20.0",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.13.2",
 		"cookie-parser": "^1.4.6",

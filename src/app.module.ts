@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common'
 
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { WinstonModule } from 'nest-winston'
+// import { TypeOrmModule } from '@nestjs/typeorm'
 import WinstonConfig from '@/global/middleware/logger.config'
+import { WinstonModule } from 'nest-winston'
 
-import { AppController } from './app.controller'
-import { LoginModule } from '@/module/login/login.module'
 import { AuthModule } from '@/module/auth/auth.module'
-import { UserModule } from '@/module/user/user.module'
-import { FileModule } from '@/module/file/file.module'
 import { ExampleModule } from '@/module/example/example.module'
+import { FileModule } from '@/module/file/file.module'
+import { LoginModule } from '@/module/login/login.module'
+import { UserModule } from '@/module/user/user.module'
+import { AppController } from './app.controller'
+import { CsrfModule } from './module/csrf/csrf.module'
 
 // 根模块
 @Module({
@@ -23,6 +24,7 @@ import { ExampleModule } from '@/module/example/example.module'
 		UserModule,
 		FileModule,
 		ExampleModule,
+		CsrfModule,
 	],
 	// 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应(按构造函数循序写)
 	controllers: [AppController],

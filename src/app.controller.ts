@@ -13,6 +13,6 @@ export class AppController {
 	@Get('hello')
 	helloApp() {
 		this.logger.info(`日志 -> ${JSON.stringify(1)}`)
-		return 'hello app'
+		return { data: null }
 	}
 }
