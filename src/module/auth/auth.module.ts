@@ -11,6 +11,7 @@ import { LocalStrategy } from './local.strategy'
 
 @Module({
 	imports: [
+		// 设置默认的 passport 策略
 		PassportModule.register({ defaultStrategy: 'jwt' }),
 		JwtModule.register({
 			secret: secret,
