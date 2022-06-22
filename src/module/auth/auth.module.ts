@@ -1,15 +1,13 @@
+import { expiresIn, secret } from '@/constant/jwt'
+// 其他模块
+import { UserService } from '@/module/user/user.service'
 import { Module } from '@nestjs/common'
-import { expiresIn, secret } from '@/config/jwt-constants'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
-
 // 本文件夹
 import { AuthService } from './auth.service'
 import { JwtStrategy } from './jwt.strategy'
 import { LocalStrategy } from './local.strategy'
-
-// 其他模块
-import { UserService } from '@/module/user/user.service'
 
 @Module({
 	imports: [
