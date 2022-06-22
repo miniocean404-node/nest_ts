@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { WinstonModule } from 'nest-winston'
-import WinstonConfig from '@/core/middleware/logger.config'
+import WinstonConfig from '@/global/middleware/logger.config'
 
 import { AppController } from './app.controller'
 import { LoginModule } from '@/module/login/login.module'

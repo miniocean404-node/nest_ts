@@ -1,5 +1,5 @@
-import { HttpExceptionFilter } from '@/core/filter/http-exception.filter'
-import { TransformInterceptor } from '@/core/interceptor/transform.interceptor'
+import { HttpExceptionFilter } from '@/global/filter/http-exception.filter'
+import { TransformInterceptor } from '@/global/interceptor/transform.interceptor'
 import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
