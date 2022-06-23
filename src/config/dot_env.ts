@@ -9,14 +9,6 @@ function getDotEnv() {
 	return dotenv.config({ path }).parsed || {}
 }
 
-const dotenvConfig = getDotEnv()
-const { LOG_OUT_DIR, Temp_File_Path } = dotenvConfig
-
-const pathConfig = {
-	LOG_OUT_DIR: resolve(LOG_OUT_DIR),
-	Temp_File_Path: resolve(Temp_File_Path),
-}
-
-const NODE_VARIABLE = Object.assign({ NODE_ENV: env }, dotenvConfig, pathConfig)
+const NODE_VARIABLE = Object.assign({ NODE_ENV: env }, getDotEnv())
 
 export default NODE_VARIABLE
