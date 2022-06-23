@@ -3,9 +3,10 @@ import { default as CustomExceptionError } from '@/utils/exception'
 import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common'
 
 @Injectable()
-export class JwtMiddleware<TRequest = any, TResponse = any> implements NestMiddleware {
+export class JwtMiddleware implements NestMiddleware {
 	constructor(private readonly authService: AuthService) {}
-	use(req: any, res: TResponse, next: (error?: Error | any) => void) {
+
+	use(req: any, _: any, next: (error?: Error | any) => void) {
 		const { headers } = req
 
 		const token = headers.token
