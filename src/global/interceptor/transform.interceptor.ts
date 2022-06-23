@@ -1,5 +1,5 @@
 import type { InterceptorRes } from '@/typings/interceptor'
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common'
+import { CallHandler, ExecutionContext, HttpStatus, Injectable, NestInterceptor } from '@nestjs/common'
 import { map, Observable } from 'rxjs'
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
@@ -10,7 +10,7 @@ export class TransformInterceptor implements NestInterceptor {
 
 				return {
 					data: data || null,
-					code: code || 200,
+					code: code || HttpStatus.OK,
 					msg: msg || '请求成功',
 				}
 			})
