@@ -1,6 +1,6 @@
 import { AuthService } from '@/module/auth/auth.service'
-import CustomExceptionTest from '@/utils/exception'
-import { Injectable, NestMiddleware } from '@nestjs/common'
+import { default as CustomExceptionError } from '@/utils/exception'
+import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common'
 
 @Injectable()
 export class JwtMiddleware<TRequest = any, TResponse = any> implements NestMiddleware {
@@ -13,7 +13,7 @@ export class JwtMiddleware<TRequest = any, TResponse = any> implements NestMiddl
 		const user = this.authService.decodeToken(token)
 
 		if (!user) {
-			throw new CustomExceptionTest({ data: 1 }, 100)
+			throw new CustomExceptionError({ data: 1, code: HttpStatus.UNAUTHORIZED })
 		}
 
 		next()

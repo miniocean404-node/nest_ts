@@ -1,24 +1,17 @@
-import { HttpException } from '@nestjs/common'
+import { HttpException, HttpStatus } from '@nestjs/common'
 
-class CustomExceptionTest extends HttpException {
-	constructor(private readonly res, private readonly s) {
-		super(res, s)
+class CustomExceptionError extends HttpException {
+	constructor(objectOrError: object, message = '自定义错误', code?: number) {
+		const errRes = {
+			data: null,
+			code,
+			message,
+			timestamp: new Date().getTime(),
+			...objectOrError,
+		}
+
+		super(HttpException.createBody(errRes, message, code || HttpStatus.BAD_REQUEST), code || HttpStatus.BAD_REQUEST)
 	}
-	// initMessage(): void {
-	// 	throw new Error('Method not implemented.')
-	// }
-	// initName(): void {
-	// 	throw new Error('Method not implemented.')
-	// }
-	// getResponse(): string | object {
-	// 	throw new Error('Method not implemented.')
-	// }
-	// getStatus(): number {
-	// 	throw new Error('Method not implemented.')
-	// }
-	// name: string
-	// message: string
-	// stack?: string
 }
 
-export default CustomExceptionTest
+export default CustomExceptionError
