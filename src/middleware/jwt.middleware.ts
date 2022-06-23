@@ -1,4 +1,5 @@
 import { AuthService } from '@/module/auth/auth.service'
+import CustomExceptionTest from '@/utils/exception'
 import { Injectable, NestMiddleware } from '@nestjs/common'
 
 @Injectable()
@@ -12,7 +13,7 @@ export class JwtMiddleware<TRequest = any, TResponse = any> implements NestMiddl
 		const user = this.authService.decodeToken(token)
 
 		if (!user) {
-			throw new Error('没有权限')
+			throw new CustomExceptionTest({ data: 1 }, 100)
 		}
 
 		next()
