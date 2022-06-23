@@ -4,6 +4,7 @@
 // 字体背景颜色：black,red,green,yellow,blue, magenta,cyan,white,gray,grey
 // 背景颜色：blackBG,redBG,greenBG,yellowBG,blueBG,magentaBG,cyanBG,whiteBG
 
+import { LOG_LEVEL, LOG_OUT_DIR } from '@/constant/log'
 import { addColors, format, LoggerOptions, transports } from 'winston'
 import 'winston-daily-rotate-file'
 
@@ -50,7 +51,7 @@ const defaultOptions = {
 }
 
 const customConfig: LoggerOptions = {
-	level: 'info',
+	level: LOG_LEVEL,
 	levels: myCustomLevels.levels,
 	format: customFormat,
 	silent: false, // 是否禁用所有日志
@@ -68,18 +69,18 @@ const customConfig: LoggerOptions = {
 		new transports.DailyRotateFile({
 			// handleExceptions:true //处理异常
 			// handleRejections:true //处理未经批准的拒绝承诺
-			filename: 'logs/info/%DATE%.log',
+			filename: `${LOG_OUT_DIR}/info/%DATE%.log`,
 			level: 'info',
 			...defaultOptions,
 		}),
 		new transports.DailyRotateFile({
-			filename: 'logs/err/%DATE%.log',
+			filename: `${LOG_OUT_DIR}/err/%DATE%.log`,
 			level: 'error',
 			...defaultOptions,
 		}),
 	],
 	// exitOnError:false //异常时候是否退出 false 退出 默认为 true
-	exceptionHandlers: [new transports.File({ filename: 'logs/other/exceptions.log' })],
+	exceptionHandlers: [new transports.File({ filename: `${LOG_OUT_DIR}/other/exceptions.log` })],
 	// rejectionHandlers: [new transports.File({ filename: 'logs/other/reject.log' })], //处理未经批准的拒绝承诺,
 }
 

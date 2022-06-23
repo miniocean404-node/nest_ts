@@ -1,4 +1,4 @@
-import NODE_VARIABLE from '@/config/env'
+import { JWT_EXPIRES_IN, JWT_SECRET } from '@/constant/jwt'
 // 其他模块
 import { UserService } from '@/module/user/user.service'
 import { Module } from '@nestjs/common'
@@ -14,8 +14,8 @@ import { LocalStrategy } from './local.strategy'
 		// 设置默认的 passport 策略
 		PassportModule.register({ defaultStrategy: 'jwt' }),
 		JwtModule.register({
-			secret: NODE_VARIABLE.JWT_SECRET,
-			signOptions: { expiresIn: NODE_VARIABLE.JWT_EXPIRES_IN }, // token 过期时效
+			secret: JWT_SECRET,
+			signOptions: { expiresIn: JWT_EXPIRES_IN }, // token 过期时效
 		}),
 	],
 	providers: [AuthService, UserService, LocalStrategy, JwtStrategy],

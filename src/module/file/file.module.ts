@@ -1,3 +1,4 @@
+import { Temp_File_Path } from '@/constant/file'
 import { Module } from '@nestjs/common'
 import { MulterModule } from '@nestjs/platform-express'
 import dayjs from 'dayjs'
@@ -15,7 +16,7 @@ import { FileService } from './file.service'
 		MulterModule.register({
 			storage: diskStorage({
 				// 配置文件上传后的文件夹路径
-				destination: `./public/upload/${dayjs().format('YYYY-MM-DD')}`,
+				destination: `.${Temp_File_Path}/${dayjs().format('YYYY-MM-DD')}`,
 				filename: (req, file, cb) => {
 					// 在此处自定义保存后的文件名称
 					const filename = `${nanoid()}.${file.mimetype.split('/')[1]}`
