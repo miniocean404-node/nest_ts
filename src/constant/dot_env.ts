@@ -9,6 +9,6 @@ function getDotEnv() {
 	return dotenv.config({ path }).parsed || {}
 }
 
-const NODE_VARIABLE = Object.assign({ NODE_ENV: env }, getDotEnv())
+const NODE_ENV_CONST = Object.assign({ NODE_ENV: env }, getDotEnv())
 
-export default NODE_VARIABLE
+export default NODE_ENV_CONST
