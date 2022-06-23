@@ -1,6 +1,5 @@
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-import csrf from 'csurf'
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
 
@@ -18,7 +17,7 @@ const middleware = [
 	// httpOnly 只能是否是 web 服务器访问
 	// key 存储令牌秘密的 cookie 的名称
 	// 服务端会生成秘钥 secret 设置客户端 cookie ,需要传递 返回token 也给客户端让他携带回来
-	csrf({ cookie: { key: '_csrf', path: '/', secure: false, maxAge: 3000, httpOnly: false, signed: false, sameSite: 'none' } }),
+	// csurf({ cookie: { key: '_csrf', path: '/', secure: false, maxAge: 3000, httpOnly: false, signed: false, sameSite: 'none' } }),
 
 	// 为了保护您的应用程序免受暴力攻击，您必须实现某种速率限制
 	rateLimit({

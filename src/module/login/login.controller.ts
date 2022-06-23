@@ -13,16 +13,16 @@ export class LoginController {
 		private readonly authService: AuthService
 	) {}
 
-	// JWT验证 - Step 1: 用户请求登录
-	@Post('login')
-	async login(@Body() loginParma: any) {
+	@Post('getToken')
+	async login(@Body() { username, password }: any) {
 		console.log('JWT验证 - Step 1: 用户请求登录')
 
-		const authResult = await this.authService.validateUser(loginParma.username, loginParma.password)
+		const authResult = await this.authService.validateUser(username, password)
 
 		switch (authResult.code) {
 			case 1:
-			// return this.authService.certificate(authResult.user)
+				// 获取token
+				return this.authService.certificate(authResult.user)
 			case 2:
 				return {
 					code: 600,

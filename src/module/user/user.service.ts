@@ -6,9 +6,9 @@ export class UserService {
 	// 查询是否有该用户
 	async findOne(username: string): Promise<any | undefined> {
 		try {
-			return 'user'
+			return { username: 'user', password: 'wZcAtvIFeVYOPv0e9Q9Mmg==', salt: 'shinobi7414' }
 		} catch (error) {
-			return console.error(error)
+			return error
 		}
 	}
 
