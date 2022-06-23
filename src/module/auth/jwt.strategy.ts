@@ -1,4 +1,4 @@
-import { secret } from '@/constant/jwt'
+import NODE_VARIABLE from '@/config/env'
 import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { ExtractJwt, Strategy } from 'passport-jwt'
@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			// 确保 JWT 没有过期的责任委托给 Passport 模块。如果我们的路由提供了一个过期的 JWT ，请求将被拒绝，并发送 401 未经授权的响应。Passport 会自动为我们处理
 			// jwt 产出 token 时的秘钥
-			secretOrKey: secret,
+			secretOrKey: NODE_VARIABLE.JWT_SECRET,
 		})
 	}
 

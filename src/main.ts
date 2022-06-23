@@ -3,6 +3,7 @@ import { GlobalExceptionFilter } from '@/global/filter/global-exception.filter'
 import { HttpExceptionFilter } from '@/global/filter/http-exception.filter'
 import { TransformInterceptor } from '@/global/interceptor/transform.interceptor'
 import middleware from '@/global/middleware'
+import { src } from '@/utils/path'
 import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
@@ -29,7 +30,7 @@ async function bootstrap() {
 	app.useGlobalInterceptors(new TransformInterceptor())
 
 	// 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
-	const root = process.cwd() || join(__dirname, '..')
+	const root = src
 	// app.use('/public', express.static(join(rootDir, 'public')));
 	app.useStaticAssets(join(root, 'public'), { prefix: '/public' })
 
