@@ -41,8 +41,10 @@ export class AuthService {
 			role: user.role,
 		}
 		console.log('JWT验证 - Step 3: 处理 jwt 签证')
+
+		const token = this.getToken(payload)
+
 		try {
-			const token = this.jwtService.sign(payload)
 			return {
 				code: 200,
 				data: {
@@ -56,5 +58,17 @@ export class AuthService {
 				msg: `账号或密码错误`,
 			}
 		}
+	}
+
+	// 加密 token
+	getToken(payload) {
+		const token = this.jwtService.sign(payload)
+		return token
+	}
+
+	// 解密 token
+	decodeToken(token: string) {
+		const userInfo = this.jwtService.decode(token)
+		return userInfo
 	}
 }

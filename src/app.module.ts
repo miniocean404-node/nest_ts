@@ -1,14 +1,13 @@
-import { Module } from '@nestjs/common'
-
 // import { TypeOrmModule } from '@nestjs/typeorm'
-import WinstonConfig from '@/global/middleware/logger.config'
-import { WinstonModule } from 'nest-winston'
-
+import { JwtMiddleware } from '@/middleware/jwt.middleware'
+import WinstonConfig from '@/middleware/logger.config'
 import { AuthModule } from '@/module/auth/auth.module'
 import { ExampleModule } from '@/module/example/example.module'
 import { FileModule } from '@/module/file/file.module'
 import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
+import { MiddlewareConsumer, Module } from '@nestjs/common'
+import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
 import { CsrfModule } from './module/csrf/csrf.module'
 
@@ -19,6 +18,8 @@ import { CsrfModule } from './module/csrf/csrf.module'
 		// 数据库连接
 		// TypeOrmModule.forRoot(),
 		WinstonModule.forRoot(WinstonConfig),
+
+		// 业务模块
 		LoginModule,
 		AuthModule,
 		UserModule,
@@ -33,4 +34,10 @@ import { CsrfModule } from './module/csrf/csrf.module'
 	// 导出其他模块需要共享的Providers以及导入的模块(只能导出在那个模块的providers或imports中注册或导入过的模块或提供者)
 	exports: [],
 })
-export class AppModule {}
+export class AppModule {
+	configure(consumer: MiddlewareConsumer) {
+		// apply() 使用 中间件 和 app.use 一样
+		// forRoutes() 应用中间件的路由
+		consumer.apply(JwtMiddleware).forRoutes('login')
+	}
+}
