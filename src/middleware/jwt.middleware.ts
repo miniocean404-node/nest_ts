@@ -6,7 +6,7 @@ import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common'
 export class JwtMiddleware implements NestMiddleware {
 	constructor(private readonly authService: AuthService) {}
 
-	use(req: any, _: any, next: (error?: Error | any) => void) {
+	use(req: any, res: any, next: (error?: Error | any) => void) {
 		const { headers } = req
 
 		const token = headers.token
