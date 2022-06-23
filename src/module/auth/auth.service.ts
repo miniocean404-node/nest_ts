@@ -1,5 +1,5 @@
 import { UserService } from '@/module/user/user.service'
-import { encryptPassword } from '@/utils/cryptogram'
+import { encryptPassword } from '@/utils/encrypt'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 

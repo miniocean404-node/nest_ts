@@ -1,4 +1,4 @@
-import { encryptPassword, makeSalt } from '@/utils/cryptogram'
+import { encryptPassword, makeSalt } from '@/utils/encrypt'
 import { Injectable } from '@nestjs/common'
 
 @Injectable()
