@@ -2,6 +2,7 @@ import { AuthService } from '@/module/auth/auth.service'
 import { UserService } from '@/module/user/user.service'
 import { Body, Controller, Post } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
+import { LocalStrategy } from './../auth/local.strategy'
 import { LoginService } from './login.service'
 
 @ApiTags('登录')
@@ -10,7 +11,10 @@ export class LoginController {
 	constructor(
 		private readonly service: LoginService,
 		private readonly usersService: UserService,
-		private readonly authService: AuthService
+		// 使用 AuthService 校验用户
+		private readonly authService: AuthService,
+		// 使用 LocalStrategy 校验
+		private readonly localStrategy: LocalStrategy
 	) {}
 
 	@Post('getToken')
