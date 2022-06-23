@@ -10,7 +10,9 @@ class CustomExceptionError extends HttpException {
 			...objectOrError,
 		}
 
-		super(HttpException.createBody(errRes, message, code || HttpStatus.BAD_REQUEST), code || HttpStatus.BAD_REQUEST)
+		const errCode = code || HttpStatus.OK
+
+		super(HttpException.createBody(errRes, message, errCode), errCode)
 	}
 }
 
