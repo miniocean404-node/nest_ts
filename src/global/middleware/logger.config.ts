@@ -4,33 +4,11 @@
 // 字体背景颜色：black,red,green,yellow,blue, magenta,cyan,white,gray,grey
 // 背景颜色：blackBG,redBG,greenBG,yellowBG,blueBG,magentaBG,cyanBG,whiteBG
 
-import { LOG_LEVEL, LOG_OUT_DIR } from '@/constant/log'
+import { LOG_COLOR, LOG_FLAG, LOG_LEVEL, LOG_LEVELS_CONFIG, LOG_OUT_DIR } from '@/constant/log'
 import { addColors, format, LoggerOptions, transports } from 'winston'
 import 'winston-daily-rotate-file'
 
-// 自定义日志等级颜色
-const myCustomLevels = {
-	levels: {
-		error: 0,
-		warn: 1,
-		info: 2,
-		http: 3,
-		verbose: 4,
-		debug: 5,
-		silly: 6,
-	},
-	colors: {
-		error: 'red',
-		warn: 'yellow',
-		info: 'blue whiteBG',
-		http: 'green',
-		verbose: 'green',
-		debug: 'green',
-		silly: 'green',
-	},
-}
-
-addColors(myCustomLevels.colors)
+addColors(LOG_COLOR)
 
 // 自定义格式化信息
 const customFormat = format.combine(
@@ -52,9 +30,9 @@ const defaultOptions = {
 
 const customConfig: LoggerOptions = {
 	level: LOG_LEVEL,
-	levels: myCustomLevels.levels,
+	levels: LOG_LEVELS_CONFIG,
+	silent: LOG_FLAG, // 是否禁用所有日志
 	format: customFormat,
-	silent: false, // 是否禁用所有日志
 	transports: [
 		// 自定义控制台信息
 		new transports.Console({
