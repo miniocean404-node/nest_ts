@@ -19,7 +19,7 @@ export class ExampleController {
 	@Get('test')
 	@ApiOperation({ summary: '获取测试信息' })
 	getLoginInfo(@Query() params: CreateTestDto): object {
-		console.log(this.configService.get<string>('PORT', 'default value'))
+		console.log(this.configService.get<string>('PORT', 'default value', { infer: true }))
 
 		return this.service.getHello()
 	}

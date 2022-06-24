@@ -9,10 +9,10 @@ import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
 import { MiddlewareConsumer, Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
 import { CsrfModule } from './module/csrf/csrf.module'
-
 // 根模块
 @Module({
 	// imports 导入模块相当于导入这个模块所有的（包括这个模块导入的其他模块 包括：providers、imports）
@@ -20,7 +20,24 @@ import { CsrfModule } from './module/csrf/csrf.module'
 		// 数据库连接
 		// TypeOrmModule.forRoot(),
 		WinstonModule.forRoot(WinstonConfig),
-		ConfigModule.forRoot({ ignoreEnvFile: false, isGlobal: true, load: [nestConfig] }),
+		ConfigModule.forRoot({
+			ignoreEnvFile: false, // 是否忽略.env文件
+			isGlobal: true, // 是否全局
+			cache: true, // 是否缓存
+			expandVariables: true, // 启用环境变量扩展${}
+			load: [nestConfig],
+			// 校验是否符合规则，否则异常
+			validationSchema: Joi.object({
+				node_env: Joi.string().valid('development', 'production').default('development'),
+				PORT: Joi.number().default(3000),
+			}),
+			validationOptions: {
+				// 控制是否允许环境变量中的未知键
+				allowUnknown: true,
+				// 如果为真，则在第一个错误时停止验证；如果为 false，则返回所有错误
+				abortEarly: false,
+			},
+		}),
 
 		// 业务模块
 		LoginModule,
