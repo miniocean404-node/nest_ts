@@ -5,10 +5,10 @@ import { UserService } from './user.service'
 @ApiTags('用户')
 @Controller('user')
 export class UserController {
-	constructor(private readonly service: UserService) {}
+  constructor(private readonly service: UserService) {}
 
-	@Post('userList')
-	async register(@Body() body: any) {
-		return body
-	}
+  @Post('userList')
+  async register(@Body() body: any) {
+    return body
+  }
 }

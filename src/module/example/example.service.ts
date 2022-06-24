@@ -10,10 +10,10 @@ import { Injectable, Scope } from '@nestjs/common'
 // 还记得上面那个通过构造函数注入吗？一个新的实例才能才能应对新的构造函数。例如：一个Service是REQUEST作用域的，那么使用它的Controller也是REQUEST作用域。
 
 @Injectable({
-	scope: Scope.TRANSIENT,
+  scope: Scope.TRANSIENT,
 })
 export class ExampleService {
-	getHello(): object {
-		return { data: 'Hello World!' }
-	}
+  getHello(): object {
+    return { data: 'Hello World!' }
+  }
 }

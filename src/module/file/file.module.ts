@@ -9,23 +9,23 @@ import { FileController } from './file.controller'
 import { FileService } from './file.service'
 
 @Module({
-	imports: [
-		MulterModule.registerAsync({
-			useFactory: () => ({}),
-		}),
-		MulterModule.register({
-			storage: diskStorage({
-				// 配置文件上传后的文件夹路径
-				destination: `.${Temp_File_Path}/${dayjs().format('YYYY-MM-DD')}`,
-				filename: (req, file, cb) => {
-					// 在此处自定义保存后的文件名称
-					const filename = `${nanoid()}.${file.mimetype.split('/')[1]}`
-					return cb(null, filename)
-				},
-			}),
-		}),
-	],
-	controllers: [FileController],
-	providers: [FileService],
+  imports: [
+    MulterModule.registerAsync({
+      useFactory: () => ({}),
+    }),
+    MulterModule.register({
+      storage: diskStorage({
+        // 配置文件上传后的文件夹路径
+        destination: `.${Temp_File_Path}/${dayjs().format('YYYY-MM-DD')}`,
+        filename: (req, file, cb) => {
+          // 在此处自定义保存后的文件名称
+          const filename = `${nanoid()}.${file.mimetype.split('/')[1]}`
+          return cb(null, filename)
+        },
+      }),
+    }),
+  ],
+  controllers: [FileController],
+  providers: [FileService],
 })
 export class FileModule {}
