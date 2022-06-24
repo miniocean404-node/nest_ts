@@ -1,7 +1,8 @@
 import { NoAuth } from '@/decorator/custom'
 import { AuthService } from '@/module/auth/auth.service'
 import { UserService } from '@/module/user/user.service'
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Post, UseGuards } from '@nestjs/common'
+import { AuthGuard } from '@nestjs/passport'
 import { ApiTags } from '@nestjs/swagger'
 import { LocalStrategy } from './../auth/local.strategy'
 import { LoginService } from './login.service'
@@ -42,6 +43,8 @@ export class LoginController {
 		}
 	}
 
+	@NoAuth()
+	@UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
 	@Post('register')
 	async register(@Body() body: any) {
 		return await this.usersService.register(body)

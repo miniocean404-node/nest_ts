@@ -22,8 +22,8 @@
 		"create-moudle": "nest g mo module/posts",
 		"create-controller": "nest g co module/posts",
 		"create-service": "nest g s module/posts",
-		"create-filter": "nest g filter global/filter/http-exception",
-		"create-interceptor": "nest g interceptor global/interceptor/transform",
+		"create-filter": "nest g filter filter/http-exception",
+		"create-interceptor": "nest g interceptor interceptor/transform",
 		"create-middleware": "nest g middleware logger middleware",
 		"create-guard": "nest g gu jwt guard"
 	},

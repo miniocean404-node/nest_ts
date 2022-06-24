@@ -2,6 +2,7 @@ import { AppModule } from '@/app.module'
 import { GlobalExceptionFilter } from '@/filter/exception.global.filter'
 import { HttpExceptionFilter } from '@/filter/exception.http.filter'
 import { JwtGlobalGuard } from '@/guard/jwt.global.guard'
+import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor'
 import { TransformInterceptor } from '@/interceptor/transform.global.interceptor'
 import middleware from '@/middleware/global_middleware'
 import { src } from '@/utils/path'
@@ -27,7 +28,7 @@ async function bootstrap() {
 	// 生命周期是以下顺序
 	app.use(...middleware) // 中间件
 	app.useGlobalGuards(new JwtGlobalGuard()) //  守卫
-	app.useGlobalInterceptors(new TransformInterceptor()) // 拦截器
+	app.useGlobalInterceptors(new TransformInterceptor(), new TimeoutInterceptor()) // 拦截器
 	app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter()) // 过滤器
 	app.useGlobalPipes(new ValidationPipe()) // 管道
 

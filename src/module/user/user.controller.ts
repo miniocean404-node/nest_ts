@@ -1,5 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
+import { Body, Controller, Post } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { UserService } from './user.service'
 
@@ -8,9 +7,8 @@ import { UserService } from './user.service'
 export class UserController {
 	constructor(private readonly service: UserService) {}
 
-	@UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
-	@Post('register')
+	@Post('userList')
 	async register(@Body() body: any) {
-		return await this.service.register(body)
+		return body
 	}
 }
