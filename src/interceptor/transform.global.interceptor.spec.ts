@@ -1,4 +1,4 @@
-import { TransformInterceptor } from './transform.interceptor'
+import { TransformInterceptor } from './transform.global.interceptor'
 
 describe('TransformInterceptor', () => {
 	it('should be defined', () => {

@@ -1,3 +1,4 @@
+import { NoAuth } from '@/decorator/custom'
 import { AuthService } from '@/module/auth/auth.service'
 import { UserService } from '@/module/user/user.service'
 import { Body, Controller, Post } from '@nestjs/common'
@@ -17,6 +18,7 @@ export class LoginController {
 		private readonly localStrategy: LocalStrategy
 	) {}
 
+	@NoAuth()
 	@Post('getToken')
 	async login(@Body() { username, password }: any) {
 		console.log('JWT验证 - Step 1: 用户请求登录')

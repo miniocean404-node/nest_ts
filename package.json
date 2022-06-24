@@ -24,7 +24,8 @@
 		"create-service": "nest g s module/posts",
 		"create-filter": "nest g filter global/filter/http-exception",
 		"create-interceptor": "nest g interceptor global/interceptor/transform",
-		"create-middleware": " nest g middleware logger middleware"
+		"create-middleware": "nest g middleware logger middleware",
+		"create-guard": "nest g gu jwt guard"
 	},
 	"dependencies": {
 		"@nestjs/common": "^8.4.6",

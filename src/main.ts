@@ -1,7 +1,8 @@
 import { AppModule } from '@/app.module'
-import { GlobalExceptionFilter } from '@/global/filter/global-exception.filter'
-import { HttpExceptionFilter } from '@/global/filter/http-exception.filter'
-import { TransformInterceptor } from '@/global/interceptor/transform.interceptor'
+import { GlobalExceptionFilter } from '@/filter/exception.global.filter'
+import { HttpExceptionFilter } from '@/filter/exception.http.filter'
+import { JwtGlobalGuard } from '@/guard/jwt.global.guard'
+import { TransformInterceptor } from '@/interceptor/transform.global.interceptor'
 import middleware from '@/middleware/global_middleware'
 import { src } from '@/utils/path'
 import { ValidationPipe } from '@nestjs/common'
@@ -13,8 +14,6 @@ import { join } from 'path'
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(AppModule, {})
 
-	app.use(...middleware)
-
 	app.setGlobalPrefix('api/v1')
 	app.enableCors({
 		origin: '*',
@@ -25,9 +24,12 @@ async function bootstrap() {
 		maxAge: 3000,
 	})
 
-	app.useGlobalPipes(new ValidationPipe())
-	app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter())
-	app.useGlobalInterceptors(new TransformInterceptor())
+	// 生命周期是以下顺序
+	app.use(...middleware) // 中间件
+	app.useGlobalGuards(new JwtGlobalGuard()) //  守卫
+	app.useGlobalInterceptors(new TransformInterceptor()) // 拦截器
+	app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter()) // 过滤器
+	app.useGlobalPipes(new ValidationPipe()) // 管道
 
 	// 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
 	const root = src
