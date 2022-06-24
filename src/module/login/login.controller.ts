@@ -1,7 +1,8 @@
 import { NoAuth } from '@/decorator/custom'
 import { AuthService } from '@/module/auth/auth.service'
 import { UserService } from '@/module/user/user.service'
-import { Body, Controller, Post, UseGuards } from '@nestjs/common'
+import CustomExceptionError from '@/utils/exception'
+import { Body, Controller, HttpStatus, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { ApiTags } from '@nestjs/swagger'
 import { LocalStrategy } from './../auth/local.strategy'
@@ -31,15 +32,16 @@ export class LoginController {
 				// 获取token
 				return this.authService.certificate(authResult.user)
 			case 2:
-				return {
-					code: 600,
-					msg: `账号或密码不正确`,
-				}
+				throw new CustomExceptionError(
+					{
+						code: 600,
+						msg: `账号或密码不正确`,
+					},
+					HttpStatus.BAD_REQUEST
+				)
+
 			default:
-				return {
-					code: 500,
-					msg: `查无此人`,
-				}
+				return { data: [] }
 		}
 	}
 
