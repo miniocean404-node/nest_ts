@@ -8,10 +8,12 @@ export class CustomValidationPipe implements PipeTransform {
 	async transform(value: any, metadata: ArgumentMetadata) {
 		const { metatype } = metadata
 
+		// 普通校验
 		if (!metatype || !this.toValidate(metatype)) {
 			return value
 		}
 
+		// class-transformer 校验
 		const object = plainToInstance(metatype, value)
 		const errors = await validate(object)
 		if (errors.length > 0) {
