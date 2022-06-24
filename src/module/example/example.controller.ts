@@ -1,4 +1,6 @@
+import type { EnvironmentVariables } from '@/typings/dotenv'
 import { Body, Controller, Get, Inject, Post, Put, Query } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { CreateTestDto } from './dto/create-example.dot'
 import { ExampleService } from './example.service'
@@ -10,12 +12,15 @@ export class ExampleController {
 	private readonly inject // 这样在执行方法中使用this.inject会有值，在构造函数中无值
 
 	constructor(
-		private readonly service: ExampleService // @Inject('InjectName') inject, // 这样注入在构造函数中有值
+		private readonly service: ExampleService, // @Inject('InjectName') inject, // 这样注入在构造函数中有值
+		private configService: ConfigService<EnvironmentVariables>
 	) {}
 
 	@Get('test')
 	@ApiOperation({ summary: '获取测试信息' })
 	getLoginInfo(@Query() params: CreateTestDto): object {
+		console.log(this.configService.get<string>('PORT', 'default value'))
+
 		return this.service.getHello()
 	}
 

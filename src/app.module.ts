@@ -1,4 +1,5 @@
 // import { TypeOrmModule } from '@nestjs/typeorm'
+import { nestConfig } from '@/config/dotenv-config'
 import { JwtMiddleware } from '@/middleware/jwt.middleware'
 import WinstonConfig from '@/middleware/logger.config'
 import { AuthModule } from '@/module/auth/auth.module'
@@ -7,6 +8,7 @@ import { FileModule } from '@/module/file/file.module'
 import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
 import { MiddlewareConsumer, Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
 import { CsrfModule } from './module/csrf/csrf.module'
@@ -18,6 +20,7 @@ import { CsrfModule } from './module/csrf/csrf.module'
 		// 数据库连接
 		// TypeOrmModule.forRoot(),
 		WinstonModule.forRoot(WinstonConfig),
+		ConfigModule.forRoot({ ignoreEnvFile: false, isGlobal: true, load: [nestConfig] }),
 
 		// 业务模块
 		LoginModule,
