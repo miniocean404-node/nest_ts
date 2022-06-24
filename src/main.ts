@@ -10,6 +10,7 @@ import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
+import chalk from 'chalk'
 import { join } from 'path'
 
 async function bootstrap() {
@@ -48,8 +49,10 @@ async function bootstrap() {
 	SwaggerModule.setup('doc', app, document)
 
 	await app.listen(3000)
-	console.log('http://localhost:3000/api/v1')
-	console.log('接口文档:http://localhost:3000/doc')
+
+	console.log('\r\n')
+	console.log(chalk.blue('接口地址:http://localhost:3000/api/v1'))
+	console.log(chalk.blue('接口文档:http://localhost:3000/doc'))
 }
 
 bootstrap().then()
