@@ -1,7 +1,11 @@
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 class CustomExceptionError extends HttpException {
-	constructor(private readonly objectOrError: object, public readonly message = '自定义错误', private readonly code?: number) {
+	private static readonly message = '自定义错误'
+
+	constructor(private readonly objectOrError: object, private readonly code?: number) {
+		const message = CustomExceptionError.message
+
 		const errRes = {
 			data: null,
 			code,

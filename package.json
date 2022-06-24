@@ -25,7 +25,8 @@
 		"create-filter": "nest g filter filter/http-exception",
 		"create-interceptor": "nest g interceptor interceptor/transform",
 		"create-middleware": "nest g middleware logger middleware",
-		"create-guard": "nest g gu jwt guard"
+		"create-guard": "nest g gu jwt guard",
+		"create-pipe": "nest g pi name pipe"
 	},
 	"dependencies": {
 		"@nestjs/common": "^8.4.6",

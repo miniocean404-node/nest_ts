@@ -5,6 +5,7 @@ import { JwtGlobalGuard } from '@/guard/jwt.global.guard'
 import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor'
 import { TransformInterceptor } from '@/interceptor/transform.global.interceptor'
 import middleware from '@/middleware/global_middleware'
+import { CustomValidationPipe } from '@/pipe/validation.pipe'
 import { src } from '@/utils/path'
 import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
@@ -31,7 +32,7 @@ async function bootstrap() {
 	app.useGlobalGuards(new JwtGlobalGuard()) //  守卫
 	app.useGlobalInterceptors(new TransformInterceptor(), new TimeoutInterceptor()) // 拦截器
 	app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter()) // 过滤器
-	app.useGlobalPipes(new ValidationPipe()) // 管道
+	app.useGlobalPipes(new ValidationPipe(), new CustomValidationPipe()) // 管道
 
 	// 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
 	const root = src
