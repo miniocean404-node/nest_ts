@@ -4,6 +4,7 @@ import { CronJob } from 'cron'
 
 @Injectable()
 export class ExampleScheduleService {
+  // cron patterns 地址: http://crontab.org/
   // 星号通配符 (也就是 *)
   // 范围（也就是 1-3,5) 例如 几号到几号 的 某个时间执行一次
   // 步长（也就是 */2) // 多久一次
