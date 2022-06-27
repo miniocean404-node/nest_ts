@@ -32,7 +32,16 @@ async function bootstrap() {
   app.useGlobalGuards(new JwtGlobalGuard()) //  守卫
   app.useGlobalInterceptors(new TransformInterceptor(), new TimeoutInterceptor()) // 拦截器
   app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter()) // 过滤器
-  app.useGlobalPipes(new ValidationPipe(), new CustomValidationPipe()) // 管道
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: process.env.NODE_ENV === 'production',
+      // 是否只保留 DTO 中的数据
+      whitelist: true,
+      // 根据对象的 DTO 类自动将有效负载转换为 DTO 中的类型
+      transform: true,
+    }),
+    new CustomValidationPipe()
+  ) // 管道
 
   // 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
   const root = src
