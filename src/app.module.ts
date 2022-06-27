@@ -8,8 +8,9 @@ import { FileModule } from '@/module/file/file.module'
 import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
 import { CacheInterceptor, CacheModule, MiddlewareConsumer, Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_INTERCEPTOR } from '@nestjs/core'
+import { ScheduleModule } from '@nestjs/schedule'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
@@ -21,14 +22,14 @@ import { CsrfModule } from './module/csrf/csrf.module'
   imports: [
     // 数据库连接
     // TypeOrmModule.forRoot(),
+
+    // 日志模块
     WinstonModule.forRoot(WinstonConfig),
-    CacheModule.register({
-      ttl: 5, //秒
-      max: 100, //缓存中最大和最小数量
-    }),
+
+    // dotenv 模块
     ConfigModule.forRoot({
       ignoreEnvFile: false, // 是否忽略.env文件
-      isGlobal: true, // 是否全局
+      isGlobal: true, // 全局模块加载 ConfigModule ,不需要在其他模块中导入
       cache: true, // 是否缓存
       expandVariables: true, // 启用环境变量扩展${}
       load: [nestConfig],
@@ -45,6 +46,20 @@ import { CsrfModule } from './module/csrf/csrf.module'
       },
     }),
 
+    // 缓存模块
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        isGlobal: true, // 全局模块加载 CacheModule ,不需要在其他模块中导入
+        ttl: configService.get('CACHE_TTL') || 5, //秒
+        max: 100, //缓存中最大和最小数量
+      }),
+    }),
+
+    // 定时任务模块
+    ScheduleModule.forRoot(),
+
     // 业务模块
     LoginModule,
     AuthModule,
@@ -57,7 +72,7 @@ import { CsrfModule } from './module/csrf/csrf.module'
   controllers: [AppController],
   // 注入器(inject)实例化的提供者（服务提供者,给controllers提供），处理具体的业务逻辑，模块内共享使用；
   providers: [
-    // 全局响应缓存
+    // 全局响应缓存,将 CacheInterceptor 全局绑定到每个端点 @UseInterceptors(CacheInterceptor)
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,

@@ -7,7 +7,7 @@ import { TransformInterceptor } from '@/interceptor/transform.global.interceptor
 import middleware from '@/middleware/global_middleware'
 import { CustomValidationPipe } from '@/pipe/validation.pipe'
 import { src } from '@/utils/path'
-import { ValidationPipe } from '@nestjs/common'
+import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -17,7 +17,15 @@ import { join } from 'path'
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {})
 
-  app.setGlobalPrefix('api/v1')
+  app.setGlobalPrefix('api/nest')
+  app.enableVersioning({
+    // 默认情况下，URI 中的版本将自动以 v 为前缀
+    // 可以使用 VersioningType.HEADER 请求头控制 type: VersioningType.HEADER, header: 'Custom-Header',
+    // 可以使用 Accept 请求的标头 指定版本 type: VersioningType.MEDIA_TYPE， key: 'v=', 例如头: Accept: application/json;v=2
+    type: VersioningType.URI,
+    defaultVersion: '1', // 全局版本 支持三种, '1'、['1', '2']、VERSION_NEUTRAL
+  })
+
   app.enableCors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -61,7 +69,7 @@ async function bootstrap() {
   await app.listen(3000)
 
   console.log('\r\n')
-  console.log(chalk.blue('接口地址:http://localhost:3000/api/v1'))
+  console.log(chalk.blue('接口地址:http://localhost:3000/api'))
   console.log(chalk.blue('接口文档:http://localhost:3000/doc'))
 }
 
