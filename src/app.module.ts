@@ -7,8 +7,9 @@ import { ExampleModule } from '@/module/example/example.module'
 import { FileModule } from '@/module/file/file.module'
 import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
-import { MiddlewareConsumer, Module } from '@nestjs/common'
+import { CacheInterceptor, CacheModule, MiddlewareConsumer, Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import { APP_INTERCEPTOR } from '@nestjs/core'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
@@ -21,6 +22,10 @@ import { CsrfModule } from './module/csrf/csrf.module'
     // 数据库连接
     // TypeOrmModule.forRoot(),
     WinstonModule.forRoot(WinstonConfig),
+    CacheModule.register({
+      ttl: 5, //秒
+      max: 100, //缓存中最大和最小数量
+    }),
     ConfigModule.forRoot({
       ignoreEnvFile: false, // 是否忽略.env文件
       isGlobal: true, // 是否全局
@@ -51,7 +56,13 @@ import { CsrfModule } from './module/csrf/csrf.module'
   // 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应(按构造函数循序写)
   controllers: [AppController],
   // 注入器(inject)实例化的提供者（服务提供者,给controllers提供），处理具体的业务逻辑，模块内共享使用；
-  providers: [],
+  providers: [
+    // 全局响应缓存
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
+  ],
   // 导出其他模块需要共享的Providers以及导入的模块(只能导出在那个模块的providers或imports中注册或导入过的模块或提供者)
   exports: [],
 })

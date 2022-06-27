@@ -1,19 +1,36 @@
 import type { EnvironmentVariables } from '@/typings/dotenv'
-import { Body, Controller, Get, Inject, Post, Put, Query } from '@nestjs/common'
+import {
+  Body,
+  CacheInterceptor,
+  CacheKey,
+  CacheTTL,
+  CACHE_MANAGER,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  Put,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { Cache } from 'cache-manager'
 import { CreateTestDto } from './dto/create-example.dot'
 import { ExampleService } from './example.service'
 
 ApiTags('例子')
 @Controller('example')
+// 自动缓存响应
+@UseInterceptors(CacheInterceptor)
 export class ExampleController {
   @Inject('InjectName')
   private readonly inject // 这样在执行方法中使用this.inject会有值，在构造函数中无值
 
   constructor(
     private readonly service: ExampleService, // @Inject('InjectName') inject, // 这样注入在构造函数中有值
-    private configService: ConfigService<EnvironmentVariables>
+    private configService: ConfigService<EnvironmentVariables>,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache
   ) {}
 
   @Get('test')
@@ -48,5 +65,19 @@ export class ExampleController {
   @Put('example/:id')
   update() {
     return { data: 'update' }
+  }
+
+  @Get('example/cache')
+  // 独立的缓存设置
+  @CacheKey('custom_key')
+  @CacheTTL(20)
+  async cache() {
+    // ttl 过期时间 永不过期，ttl 为 0
+    await this.cacheManager.set('key', 'value', { ttl: 1000 })
+    const value = await this.cacheManager.get('key')
+    await this.cacheManager.del('key')
+
+    // 清空所有缓存
+    await this.cacheManager.reset()
   }
 }
