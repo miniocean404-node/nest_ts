@@ -1,9 +1,13 @@
 import bodyParser from 'body-parser'
+import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
 
 const middleware = [
+  // 响应体压缩
+  compression(),
+
   // 通过适当地设置 HTTP 头，Helmet 可以帮助保护您的应用免受一些众所周知的 Web 漏洞的影响。
   helmet(),
 

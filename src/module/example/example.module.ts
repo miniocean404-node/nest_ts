@@ -9,6 +9,8 @@ import { ExampleSerializationController } from './example-serialization.controll
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
+import { ExampleCookieController } from './example-cookie.controller';
+import { ExampleEventController } from './example-event.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -26,6 +28,8 @@ const exampleProvide = {
     ExampleSerializationController,
     ExampleVersionController,
     ExampleScheduleController,
+    ExampleCookieController,
+    ExampleEventController,
   ],
   providers: [ExampleService, exampleProvide, ExampleScheduleService],
 })

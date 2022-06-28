@@ -10,12 +10,12 @@ import { UserModule } from '@/module/user/user.module'
 import { CacheInterceptor, CacheModule, MiddlewareConsumer, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_INTERCEPTOR } from '@nestjs/core'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 import { ScheduleModule } from '@nestjs/schedule'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
 import { CsrfModule } from './module/csrf/csrf.module'
-
 // 根模块
 @Module({
   // imports 导入模块相当于导入这个模块所有的（包括这个模块导入的其他模块 包括：providers、imports）
@@ -59,6 +59,24 @@ import { CsrfModule } from './module/csrf/csrf.module'
 
     // 定时任务模块
     ScheduleModule.forRoot(),
+
+    // 事件模块 注册发生在onApplicationBootstrap生命周期钩子
+    EventEmitterModule.forRoot({
+      // 是否使用通配符
+      wildcard: true,
+      // 用于分割命名空间的分隔符
+      delimiter: '.',
+      // 是否发射新事件
+      newListener: true,
+      // 是否移除事件
+      removeListener: true,
+      // 最大事件数量
+      maxListeners: 10,
+      // 侦听器数量超过最大数量时，在内存泄漏消息中显示事件名称
+      verboseMemoryLeak: true,
+      // 如果发出错误事件并且它没有侦听器，则禁用抛出
+      ignoreErrors: true,
+    }),
 
     // 业务模块
     LoginModule,
