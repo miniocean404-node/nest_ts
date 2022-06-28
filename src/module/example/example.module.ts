@@ -14,6 +14,7 @@ import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
 import { ExampleStreamController } from './example-stream.controller';
+import { ExampleSseController } from './example-sse.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -34,6 +35,7 @@ const exampleProvide = {
     ExampleCookieController,
     ExampleEventController,
     ExampleStreamController,
+    ExampleSseController,
   ],
   providers: [ExampleService, exampleProvide, ExampleScheduleService, ExampleAxiosService],
 })
