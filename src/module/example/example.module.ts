@@ -1,6 +1,10 @@
 import { CacheModule, Module } from '@nestjs/common'
 
+import { HttpModule } from '@nestjs/axios'
+import { ExampleAxiosService } from './example-axios.service'
 import { ExampleCacheController } from './example-cache.controller'
+import { ExampleCookieController } from './example-cookie.controller'
+import { ExampleEventController } from './example-event.controller'
 import { ExampleMethodController } from './example-method.controller'
 import { ExampleRouteController } from './example-route.controller'
 import { ExampleScheduleController } from './example-schedule.controller'
@@ -9,8 +13,6 @@ import { ExampleSerializationController } from './example-serialization.controll
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
-import { ExampleCookieController } from './example-cookie.controller';
-import { ExampleEventController } from './example-event.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -19,7 +21,7 @@ const exampleProvide = {
 
 // @Global()
 @Module({
-  imports: [CacheModule.register()],
+  imports: [CacheModule.register(), HttpModule],
   controllers: [
     ExampleController,
     ExampleCacheController,
@@ -31,6 +33,6 @@ const exampleProvide = {
     ExampleCookieController,
     ExampleEventController,
   ],
-  providers: [ExampleService, exampleProvide, ExampleScheduleService],
+  providers: [ExampleService, exampleProvide, ExampleScheduleService, ExampleAxiosService],
 })
 export class ExampleModule {}
