@@ -13,6 +13,7 @@ import { ExampleSerializationController } from './example-serialization.controll
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
+import { ExampleStreamController } from './example-stream.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -32,6 +33,7 @@ const exampleProvide = {
     ExampleScheduleController,
     ExampleCookieController,
     ExampleEventController,
+    ExampleStreamController,
   ],
   providers: [ExampleService, exampleProvide, ExampleScheduleService, ExampleAxiosService],
 })
