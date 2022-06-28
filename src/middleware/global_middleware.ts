@@ -16,7 +16,8 @@ const middleware = [
 
   // 注意secure:true是推荐选项。然而，它需要启用了https的网站，也就是说，HTTPS对安全cookie来说是必须的。如果配置了secure，但是通过HTTP访问网站，将不会保存cookie。如果你的node.js在代理之后，并且启用了secure:true选项，你需要在express中配置trust proxy选项。
   session({
-    secret: 'my-secret',
+    name: 'session-name',
+    secret: 'secret', // 加密 cookie
     resave: false,
     saveUninitialized: false,
   }),
@@ -27,8 +28,16 @@ const middleware = [
   // 解析请求体，为了 csrf 可以拿到请求体中的内容
   bodyParser.urlencoded({ extended: false }),
   bodyParser.json(),
+
   // 必须在 csrf 前使用 cookieParser
-  cookieParser(),
+
+  // secret： 一个字符串或者数组，用来给cookie签名。如果不指定这个选项，将不解析签名的cookie。如果提供了一个字符串，那么它会被用来作为secret。如果提供了一个数组，将尝试依次使用其元素来作为secret解析cookie。
+  // option：一个作为第二个参数传递给cookie.parse的对象，参见[cookie](https://www.npmjs.org/package/cookie)来了解更多内容。
+  // 该中间件将从请求的头文件中解析Cookie并将其数据作为req.cookies暴露出来。如果提供了secret，将暴露为req.signedCookies。这些属性以cookie名称和属性的键值对保存。
+  // 当提供了 secret 时，该中间件将解析并验证所有签名的cookie并将其值从req.cookies移动到req.signedCookies。签名cookie是指包含s:前缀的cookie。验证失败的签名cookie值会被替换为false而不是被篡改过的值。
+
+  // 解析 cookie
+  cookieParser('secret'),
 
   // CSRF (跨站脚本攻击) 保护
   // httpOnly 只能是否是 web 服务器访问

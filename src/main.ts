@@ -1,5 +1,5 @@
 import { AppModule } from '@/app.module'
-import { GlobalExceptionFilter } from '@/filter/exception.global.filter'
+import { CustomGlobalExceptionFilter } from '@/filter/exception.global.filter'
 import { HttpExceptionFilter } from '@/filter/exception.http.filter'
 import { JwtGlobalGuard } from '@/guard/jwt.global.guard'
 import { TimeoutInterceptor } from '@/interceptor/timeout.interceptor'
@@ -8,7 +8,7 @@ import middleware from '@/middleware/global_middleware'
 import { CustomValidationPipe } from '@/pipe/validation.pipe'
 import { src } from '@/utils/path'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
+import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import chalk from 'chalk'
@@ -35,11 +35,13 @@ async function bootstrap() {
     maxAge: 3000,
   })
 
+  const { httpAdapter } = app.get(HttpAdapterHost)
+
   // 生命周期是以下顺序
   app.use(...middleware) // 中间件
   app.useGlobalGuards(new JwtGlobalGuard()) //  守卫
   app.useGlobalInterceptors(new TransformInterceptor(), new TimeoutInterceptor()) // 拦截器
-  app.useGlobalFilters(new GlobalExceptionFilter(), new HttpExceptionFilter()) // 过滤器
+  app.useGlobalFilters(new CustomGlobalExceptionFilter(httpAdapter), new HttpExceptionFilter()) // 过滤器
   app.useGlobalPipes(
     new ValidationPipe({
       disableErrorMessages: process.env.NODE_ENV === 'production',
@@ -69,7 +71,7 @@ async function bootstrap() {
   await app.listen(3000)
 
   console.log('\r\n')
-  console.log(chalk.blue('接口地址:http://localhost:3000/api'))
+  console.log(chalk.blue('接口地址:http://localhost:3000/api/nest/v1'))
   console.log(chalk.blue('接口文档:http://localhost:3000/doc'))
 }
 

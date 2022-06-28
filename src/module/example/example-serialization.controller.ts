@@ -1,3 +1,4 @@
+import { NoAuth } from '@/decorator/custom'
 import { UserEntity } from '@/module/example/dto/example.serialization.dto'
 import { ClassSerializerInterceptor, Controller, Get, SerializeOptions, UseInterceptors } from '@nestjs/common'
 
@@ -11,12 +12,14 @@ export class ExampleSerializationController {
     excludePrefixes: ['_'],
   })
   @Get()
+  @NoAuth()
   findOne(): UserEntity {
     return new UserEntity({
       id: 1,
       firstName: 'Kamil',
       lastName: 'Mysliwiec',
       password: 'password',
+      _ignore: 'ignore',
     })
   }
 }

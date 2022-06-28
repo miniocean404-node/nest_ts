@@ -1,11 +1,14 @@
+import { NoAuth } from '@/decorator/custom'
 import { ExampleEvent } from '@/event/example.event'
-import { Controller } from '@nestjs/common'
+import { Controller, Get } from '@nestjs/common'
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
 
 @Controller('example-event')
 export class ExampleEventController {
   constructor(private event: EventEmitter2) {}
 
+  @Get()
+  @NoAuth()
   send() {
     this.event.emit(
       'order.created',
@@ -21,7 +24,7 @@ export class ExampleEventController {
   // 第二个参数（可选的）是一个监听器的选项对象 https://github.com/EventEmitter2/EventEmitter2#emitteronevent-listener-options-objectboolean
   @OnEvent('order.created', { async: true })
   handleExample(payload: ExampleEvent) {
-    // handle and process "OrderCreatedEvent" event
+    console.log('事件监听 order.created', payload)
   }
 
   // 要使用命名空间或者通配符，传递wildcard选项到EventEmitterModule#forRoot()方法中。
@@ -31,6 +34,6 @@ export class ExampleEventController {
   // 这样的通配符仅对一个块有效。参数order.*将匹配例如order.creted和order.shipped事件，但不会匹配order.delayed.out_of_stock。要监听这样的事件，使用多层通配符模式（例如**)
   @OnEvent('order.*')
   handleExample2(payload: ExampleEvent) {
-    // handle and process "OrderCreatedEvent" event
+    console.log('事件监听 order.*', payload)
   }
 }

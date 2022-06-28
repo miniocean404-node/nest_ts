@@ -1,10 +1,15 @@
+import { NoAuth } from '@/decorator/custom'
 import { Controller, Get, Req } from '@nestjs/common'
+import express from 'express'
 
 // 读取 session
 @Controller('example-session')
 export class ExampleSessionController {
   @Get()
-  findAll(@Req() req: any) {
-    req.session.visits = req.session.visits ? req.session.visits + 1 : 1
+  @NoAuth()
+  findAll(@Req() req: express.Request) {
+    console.log(req.session, req.cookies)
+
+    req.session['visits'] = req.session['visits'] ? req.session['visits'] + 1 : 1
   }
 }
