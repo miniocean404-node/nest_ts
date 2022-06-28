@@ -2,11 +2,24 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import rateLimit from 'express-rate-limit'
+import session from 'express-session'
 import helmet from 'helmet'
 
 const middleware = [
   // 响应体压缩
   compression(),
+
+  // secret 用于加密该会话 IDcookie，它可以是一个字符串用于单一加密，或者数组用来多重加密。如果提供了一个数组，只有第一个元素被用来加密会话 IDcookie，其他元素将被用于验证签名请求。密码本身不应该过于容易被人工解析，最好使用一组随机字符。
+  // 使能 resave 选项会强制重新保存会话即使在请求过程中它未被修改过。其默认值为true，但不赞成使用默认值，在未来这个默认值将被修改。
+  // 类似地，使能 saveUninitialized 选项将强制存储一个未初始化的会话。一个未初始化的会话可能是一个新的尚未修改的会话。配置为false用于登陆会话是很有用的，可以减少服务器存储，或者遵循法律规定在存储用户cookie前需要获得用户授权。配置为false在一个客户端在无会话情况下建立多个请求的状况下会很有用。参见这里。
+  // 还可以给session中间件传递更多参数，参见 https://github.com/expressjs/session#options 文档。
+
+  // 注意secure:true是推荐选项。然而，它需要启用了https的网站，也就是说，HTTPS对安全cookie来说是必须的。如果配置了secure，但是通过HTTP访问网站，将不会保存cookie。如果你的node.js在代理之后，并且启用了secure:true选项，你需要在express中配置trust proxy选项。
+  session({
+    secret: 'my-secret',
+    resave: false,
+    saveUninitialized: false,
+  }),
 
   // 通过适当地设置 HTTP 头，Helmet 可以帮助保护您的应用免受一些众所周知的 Web 漏洞的影响。
   helmet(),
