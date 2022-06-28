@@ -10,12 +10,12 @@ import { ExampleRouteController } from './example-route.controller'
 import { ExampleScheduleController } from './example-schedule.controller'
 import { ExampleScheduleService } from './example-schedule.service'
 import { ExampleSerializationController } from './example-serialization.controller'
+import { ExampleSessionController } from './example-session.controller'
 import { ExampleSseController } from './example-sse.controller'
 import { ExampleStreamController } from './example-stream.controller'
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
-import { ExampleSessionController } from './example-session.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
