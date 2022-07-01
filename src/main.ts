@@ -35,7 +35,7 @@ async function bootstrap() {
     maxAge: 3000,
   })
 
-  const { httpAdapter } = app.get(HttpAdapterHost)
+  const httpAdapter = app.get(HttpAdapterHost)
 
   // 生命周期是以下顺序
   app.use(...middleware) // 中间件

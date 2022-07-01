@@ -1,11 +1,12 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common'
+import { HttpAdapterHost } from '@nestjs/core'
 
 // : HttpAdapterHost<any>
 // https://www.kancloud.cn/juukee/nestjs/2669782
 // 全局异常处理
 @Catch()
 export class CustomGlobalExceptionFilter<T> implements ExceptionFilter {
-  constructor(private readonly httpAdapterHost: any) {}
+  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: T, host: ArgumentsHost) {
     // 在某些情况下，`httpAdapter` 可能在构造方法中不可用，因此我们应该在这里解决它。
@@ -25,24 +26,25 @@ export class CustomGlobalExceptionFilter<T> implements ExceptionFilter {
 
     console.log('全局异常日志： %s %s %s error: %s', exceptionStr)
 
-    response.status(status).json({
-      data: null,
-      code: status,
-      message: exception['message'],
-      timestamp: new Date().getTime(),
-      path: httpAdapter.getRequestUrl(request),
-    })
+    // 两个响应写法都可以
+    // response.status(status).json({
+    //   data: null,
+    //   code: status,
+    //   message: exception['message'],
+    //   timestamp: new Date().getTime(),
+    //   path: httpAdapter.getRequestUrl(request),
+    // })
 
-    // httpAdapter.reply(
-    //   response,
-    //   {
-    //     data: null,
-    //     code: status,
-    //     message: exception['message'],
-    //     timestamp: new Date().getTime(),
-    //     path: httpAdapter.getRequestUrl(request),
-    //   },
-    //   status
-    // )
+    httpAdapter.reply(
+      response,
+      {
+        data: null,
+        code: status,
+        message: exception['message'],
+        timestamp: new Date().getTime(),
+        path: httpAdapter.getRequestUrl(request),
+      },
+      status
+    )
   }
 }
