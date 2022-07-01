@@ -7,6 +7,7 @@ import { ExampleModule } from '@/module/example/example.module'
 import { FileModule } from '@/module/file/file.module'
 import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
+import { BullModule } from '@nestjs/bull'
 import { CacheInterceptor, CacheModule, MiddlewareConsumer, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_INTERCEPTOR } from '@nestjs/core'
@@ -22,6 +23,15 @@ import { CsrfModule } from './module/csrf/csrf.module'
   imports: [
     // 数据库连接
     // TypeOrmModule.forRoot(),
+
+    // Redis 连接
+    BullModule.registerQueue({
+      name: 'queue',
+      redis: {
+        host: '127.0.0.1',
+        port: 6379, // redis 默认端口
+      },
+    }),
 
     // 日志模块
     WinstonModule.forRoot(WinstonConfig),

@@ -16,6 +16,7 @@ import { ExampleStreamController } from './example-stream.controller'
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
+import { ExampleQueueService } from './example-queue.service';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -39,6 +40,6 @@ const exampleProvide = {
     ExampleSseController,
     ExampleSessionController,
   ],
-  providers: [ExampleService, exampleProvide, ExampleScheduleService, ExampleAxiosService],
+  providers: [ExampleService, exampleProvide, ExampleScheduleService, ExampleAxiosService, ExampleQueueService],
 })
 export class ExampleModule {}
