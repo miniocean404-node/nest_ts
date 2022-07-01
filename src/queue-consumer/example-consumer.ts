@@ -2,7 +2,7 @@ import { InjectQueue, OnGlobalQueueActive, Process, Processor } from '@nestjs/bu
 import { Job, Queue } from 'bull'
 
 @Processor('queue')
-export class AudioConsumer {
+export class ExampleQueueConsumer {
   constructor(@InjectQueue('queue') private queue: Queue) {}
 
   @Process('transcode')
@@ -12,6 +12,8 @@ export class AudioConsumer {
       console.log(job.data)
 
       progress += 10
+
+      // 队列进度
       job.progress(progress)
     }
     return {}

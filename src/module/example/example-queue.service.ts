@@ -1,3 +1,4 @@
+import { ExampleQueueConsumer } from '@/queue-consumer/example-consumer'
 import { InjectQueue } from '@nestjs/bull'
 import { Injectable } from '@nestjs/common'
 import { Queue } from 'bull'
@@ -39,6 +40,10 @@ export class ExampleQueueService {
         stackTraceLimit: 10,
       }
     )
+
+    const queueConsumer = new ExampleQueueConsumer(this.queue)
+
+    queueConsumer.transcode(job)
   }
 
   // 暂停队列

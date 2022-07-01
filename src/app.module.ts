@@ -24,14 +24,15 @@ import { CsrfModule } from './module/csrf/csrf.module'
     // 数据库连接
     // TypeOrmModule.forRoot(),
 
-    // Redis 连接
-    BullModule.registerQueue({
-      name: 'queue',
+    BullModule.forRoot('example-queue', {
       redis: {
         host: '127.0.0.1',
-        port: 6379, // redis 默认端口
+        port: 6379,
+        password: '123456',
       },
     }),
+
+    BullModule.forRoot({ redis: { password: '123456' } }),
 
     // 日志模块
     WinstonModule.forRoot(WinstonConfig),
