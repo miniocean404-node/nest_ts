@@ -6,13 +6,12 @@ import { TimeoutInterceptor } from '@/common/interceptor/timeout.interceptor'
 import { TransformInterceptor } from '@/common/interceptor/transform.global.interceptor'
 import middleware from '@/common/middleware/global_middleware'
 import { CustomValidationPipe } from '@/common/pipe/validation.pipe'
-import { src } from '@/utils/path'
+import { publicPath, viewsPath } from '@/utils/path'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import chalk from 'chalk'
-import { join } from 'path'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {})
@@ -54,9 +53,12 @@ async function bootstrap() {
   ) // 管道
 
   // 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
-  const root = src
   // app.use('/public', express.static(join(rootDir, 'public')));
-  app.useStaticAssets(join(root, 'public'), { prefix: '/public' })
+  app.useStaticAssets(publicPath, { prefix: '/public' })
+  // mvc 渲染 类似 jsp
+  app.setBaseViewsDir(viewsPath)
+
+  app.setViewEngine('pug')
 
   // 设置swagger文档
   const config = new DocumentBuilder()
@@ -72,6 +74,7 @@ async function bootstrap() {
 
   console.log('\r\n')
   console.log(chalk.blue('接口地址:http://localhost:3000/api/nest/v1'))
+  console.log(chalk.blue('MVC渲染:http://localhost:3000/api/nest/v1/app'))
   console.log(chalk.blue('接口文档:http://localhost:3000/doc'))
 }
 

@@ -1,6 +1,6 @@
+import { templatesPath } from '@/utils/path'
 import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
 import { registerAs } from '@nestjs/config'
-import { normalize } from 'path'
 
 // @nestjs-modules/mailer 使用文章 https://juejin.cn/post/6941340028849094670
 // 需要开启 SMTP 服务
@@ -27,7 +27,7 @@ const emailConfig = registerAs('email', () => ({
   },
   preview: true,
   template: {
-    dir: `${normalize(`${process.cwd()}/src/templates`)}`,
+    dir: templatesPath,
     // 默认适配器中更改inline-css选项甚至禁用它
     adapter: new PugAdapter({
       inlineCssEnabled: true,
