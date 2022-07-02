@@ -9,7 +9,7 @@ export class TransformInterceptor implements NestInterceptor {
         const { data, msg, code } = res || {}
 
         return {
-          data: data || res || null,
+          data: data || (!msg && res) || null,
           code: code || HttpStatus.OK,
           msg: msg || '请求成功',
         }

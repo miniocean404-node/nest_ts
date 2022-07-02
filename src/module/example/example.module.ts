@@ -5,6 +5,8 @@ import { BullModule } from '@nestjs/bull'
 import { ExampleAxiosService } from './example-axios.service'
 import { ExampleCacheController } from './example-cache.controller'
 import { ExampleCookieController } from './example-cookie.controller'
+import { ExampleEmailController } from './example-email.controller'
+import { ExampleEmailService } from './example-email.service'
 import { ExampleEventController } from './example-event.controller'
 import { ExampleMethodController } from './example-method.controller'
 import { ExampleQueueController } from './example-queue.controller'
@@ -31,9 +33,9 @@ const exampleProvide = {
     CacheModule.register(),
     HttpModule,
     // Redis 连接
-    BullModule.registerQueue({
+    BullModule.registerQueueAsync({
       name: 'queue',
-      configKey: 'example-queue',
+      // configKey: 'example-queue', // 命名配置 搭配 BullModule.forRoot('example-queue', {})
     }),
   ],
   controllers: [
@@ -50,7 +52,15 @@ const exampleProvide = {
     ExampleSseController,
     ExampleSessionController,
     ExampleQueueController,
+    ExampleEmailController,
   ],
-  providers: [ExampleService, exampleProvide, ExampleScheduleService, ExampleAxiosService, ExampleQueueService],
+  providers: [
+    ExampleService,
+    exampleProvide,
+    ExampleScheduleService,
+    ExampleAxiosService,
+    ExampleQueueService,
+    ExampleEmailService,
+  ],
 })
 export class ExampleModule {}

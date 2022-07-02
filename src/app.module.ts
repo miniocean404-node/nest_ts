@@ -1,49 +1,36 @@
 // import { TypeOrmModule } from '@nestjs/typeorm'
-import WinstonConfig from '@/common//middleware/logger.config'
 import { JwtMiddleware } from '@/common/middleware/jwt.middleware'
-import { nestConfig } from '@/config/dotenv-config'
+import eventConfig from '@/config/event.config'
+import allCofnig from '@/config/index.config'
 import { AuthModule } from '@/module/auth/auth.module'
 import { ExampleModule } from '@/module/example/example.module'
 import { FileModule } from '@/module/file/file.module'
 import { LoginModule } from '@/module/login/login.module'
 import { UserModule } from '@/module/user/user.module'
+import { MailerModule } from '@nestjs-modules/mailer'
 import { BullModule } from '@nestjs/bull'
 import { CacheInterceptor, CacheModule, MiddlewareConsumer, Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_INTERCEPTOR } from '@nestjs/core'
 import { EventEmitterModule } from '@nestjs/event-emitter'
 import { ScheduleModule } from '@nestjs/schedule'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
 import { CsrfModule } from './module/csrf/csrf.module'
+
 // 根模块
 @Module({
   // imports 导入模块相当于导入这个模块所有的（包括这个模块导入的其他模块 包括：providers、imports）
   imports: [
-    // 数据库连接
-    // TypeOrmModule.forRoot(),
-
-    BullModule.forRoot('example-queue', {
-      redis: {
-        host: '127.0.0.1',
-        port: 6379,
-        password: '123456',
-      },
-    }),
-
-    BullModule.forRoot({ redis: { password: '123456' } }),
-
-    // 日志模块
-    WinstonModule.forRoot(WinstonConfig),
-
     // dotenv 模块
     ConfigModule.forRoot({
       ignoreEnvFile: false, // 是否忽略.env文件
       isGlobal: true, // 全局模块加载 ConfigModule ,不需要在其他模块中导入
       cache: true, // 是否缓存
       expandVariables: true, // 启用环境变量扩展${}
-      load: [nestConfig],
+      load: allCofnig,
       // 校验是否符合规则，否则异常
       validationSchema: Joi.object({
         node_env: Joi.string().valid('development', 'production').default('development'),
@@ -57,36 +44,57 @@ import { CsrfModule } from './module/csrf/csrf.module'
       },
     }),
 
-    // 缓存模块
-    CacheModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        isGlobal: true, // 全局模块加载 CacheModule ,不需要在其他模块中导入
-        ttl: configService.get('CACHE_TTL') || 5, //秒
-        max: 100, //缓存中最大和最小数量
-      }),
-    }),
-
     // 定时任务模块
     ScheduleModule.forRoot(),
 
     // 事件模块 注册发生在onApplicationBootstrap生命周期钩子
-    EventEmitterModule.forRoot({
-      // 是否使用通配符
-      wildcard: true,
-      // 用于分割命名空间的分隔符
-      delimiter: '.',
-      // 是否发射新事件
-      newListener: true,
-      // 是否移除事件
-      removeListener: true,
-      // 最大事件数量
-      maxListeners: 10,
-      // 侦听器数量超过最大数量时，在内存泄漏消息中显示事件名称
-      verboseMemoryLeak: true,
-      // 如果发出错误事件并且它没有侦听器，则禁用抛出
-      ignoreErrors: true,
+    EventEmitterModule.forRoot(eventConfig),
+
+    // 日志模块
+    WinstonModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory(config: ConfigService) {
+        return config.get('winston')
+      },
+    }),
+
+    // 数据库连接
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory(config: ConfigService) {
+        return config.get('db')
+      },
+    }),
+
+    // 队列模块 forRoot 为所有 注入一个全局可用的配置
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return config.get('queue')
+      },
+    }),
+
+    // 邮件模块
+    MailerModule.forRootAsync({
+      // 特别注意一定要导入, 不导入就报错, 说你没在imports引入
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        // 拿到我们配置的config别名 #registerAs方法
+        return config.get('email')
+      },
+    }),
+
+    // 缓存模块
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => {
+        return config.get('cache')
+      },
     }),
 
     // 业务模块

@@ -5,7 +5,8 @@
 // 背景颜色：blackBG,redBG,greenBG,yellowBG,blueBG,magentaBG,cyanBG,whiteBG
 
 import { LOG_COLOR, LOG_FLAG, LOG_LEVEL, LOG_LEVELS_CONFIG, LOG_OUT_DIR } from '@/config/constant/log'
-import { addColors, format, LoggerOptions, transports } from 'winston'
+import { registerAs } from '@nestjs/config'
+import { addColors, format, transports } from 'winston'
 import 'winston-daily-rotate-file'
 
 addColors(LOG_COLOR)
@@ -28,7 +29,7 @@ const defaultOptions = {
   maxFiles: '14d',
 }
 
-const customConfig: LoggerOptions = {
+const winstonConfig = registerAs('winston', () => ({
   level: LOG_LEVEL,
   levels: LOG_LEVELS_CONFIG,
   silent: LOG_FLAG, // 是否禁用所有日志
@@ -60,7 +61,7 @@ const customConfig: LoggerOptions = {
   // exitOnError:false //异常时候是否退出 false 退出 默认为 true
   exceptionHandlers: [new transports.File({ filename: `${LOG_OUT_DIR}/other/exceptions.log` })],
   // rejectionHandlers: [new transports.File({ filename: 'logs/other/reject.log' })], //处理未经批准的拒绝承诺,
-}
+}))
 
 // 可以创建多个日志打印器
-export default customConfig
+export default winstonConfig
