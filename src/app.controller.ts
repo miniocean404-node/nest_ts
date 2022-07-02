@@ -5,7 +5,7 @@ import { NoAuth } from './common/decorator/custom'
 @ApiTags('App')
 @Controller('app')
 export class AppController {
-  // 视图跟目录
+  // 视图根目录
   @Get()
   @NoAuth()
   @Render('index')
