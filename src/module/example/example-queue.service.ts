@@ -1,4 +1,4 @@
-import { ExampleQueueConsumer } from '@/queue-consumer/example-consumer'
+import { ExampleQueueConsumer } from '@/common/queue-consumer/example-consumer'
 import { InjectQueue } from '@nestjs/bull'
 import { Injectable } from '@nestjs/common'
 import { Queue } from 'bull'

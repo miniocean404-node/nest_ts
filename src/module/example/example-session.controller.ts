@@ -1,4 +1,4 @@
-import { NoAuth } from '@/decorator/custom'
+import { NoAuth } from '@/common/decorator/custom'
 import { Controller, Get, Req } from '@nestjs/common'
 import express from 'express'
 

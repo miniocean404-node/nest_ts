@@ -1,4 +1,4 @@
-import { NoAuth } from '@/decorator/custom'
+import { NoAuth } from '@/common/decorator/custom'
 import { Controller, Get, Res, StreamableFile } from '@nestjs/common'
 import { createReadStream } from 'fs'
 import { join } from 'path'

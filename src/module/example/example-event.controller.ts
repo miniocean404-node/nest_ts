@@ -1,5 +1,5 @@
-import { NoAuth } from '@/decorator/custom'
-import { ExampleEvent } from '@/event/example.event'
+import { NoAuth } from '@/common/decorator/custom'
+import { ExampleEvent } from '@/common/event/example.event'
 import { Controller, Get } from '@nestjs/common'
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
 

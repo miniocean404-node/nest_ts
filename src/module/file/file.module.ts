@@ -1,4 +1,4 @@
-import { Temp_File_Path } from '@/constant/file'
+import { Temp_File_Path } from '@/config/constant/file'
 import { Module } from '@nestjs/common'
 import { MulterModule } from '@nestjs/platform-express'
 import dayjs from 'dayjs'

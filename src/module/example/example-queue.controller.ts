@@ -1,4 +1,4 @@
-import { NoAuth } from '@/decorator/custom'
+import { NoAuth } from '@/common/decorator/custom'
 import { ExampleQueueService } from '@/module/example/example-queue.service'
 import { Controller, Get } from '@nestjs/common'
 

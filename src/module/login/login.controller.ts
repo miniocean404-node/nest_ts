@@ -1,4 +1,4 @@
-import { NoAuth } from '@/decorator/custom'
+import { NoAuth } from '@/common/decorator/custom'
 import { AuthService } from '@/module/auth/auth.service'
 import { UserService } from '@/module/user/user.service'
 import CustomExceptionError from '@/utils/exception'

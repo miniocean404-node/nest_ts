@@ -1,4 +1,4 @@
-import { JWT_EXPIRES_IN, JWT_SECRET } from '@/constant/jwt'
+import { JWT_EXPIRES_IN, JWT_SECRET } from '@/config/constant/jwt'
 // 其他模块
 import { UserService } from '@/module/user/user.service'
 import { Module } from '@nestjs/common'

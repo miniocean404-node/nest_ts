@@ -1,4 +1,4 @@
-import { NoAuth } from '@/decorator/custom'
+import { NoAuth } from '@/common/decorator/custom'
 import { Controller, MessageEvent, Sse } from '@nestjs/common'
 import { interval, map, Observable } from 'rxjs'
 

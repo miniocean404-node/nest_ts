@@ -1,4 +1,4 @@
-import { NoAuth } from '@/decorator/custom'
+import { NoAuth } from '@/common/decorator/custom'
 import { Controller, Get, Req, Res } from '@nestjs/common'
 
 // 如果你想把相应处理逻辑留给框架，需要将passthrough参数设置为true

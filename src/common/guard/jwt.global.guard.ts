@@ -1,5 +1,5 @@
-import { JwtAuthGuard } from '@/guard/jwt.auth.guard'
-import { LocalAuthGuard } from '@/guard/local.auth.guard'
+import { JwtAuthGuard } from '@/common/guard/jwt.auth.guard'
+import { LocalAuthGuard } from '@/common/guard/local.auth.guard'
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { IAuthGuard } from '@nestjs/passport'
