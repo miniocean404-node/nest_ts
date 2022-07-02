@@ -26,6 +26,7 @@ import { CsrfModule } from './module/csrf/csrf.module'
   imports: [
     // dotenv 模块
     ConfigModule.forRoot({
+      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env.local'],
       ignoreEnvFile: false, // 是否忽略.env文件
       isGlobal: true, // 全局模块加载 ConfigModule ,不需要在其他模块中导入
       cache: true, // 是否缓存

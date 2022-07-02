@@ -17,7 +17,7 @@ const emailConfig = registerAs('email', () => ({
     },
     auth: {
       user: '1037306928@qq.com',
-      pass: 'skvnsoajdzsdbfhb',
+      pass: process.env.EMAIL_PASSWORD,
     },
   },
   defaults: {
