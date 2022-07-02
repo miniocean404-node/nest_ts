@@ -1,5 +1,5 @@
 import { NoAuth } from '@/common/decorator/custom'
-import { ExampleSerializationEntity } from '@/module/example/dto/example.serialization.dto'
+import { ExampleSerializationEntity } from '@/db/example-serialization.entity'
 import { ClassSerializerInterceptor, Controller, Get, SerializeOptions, UseInterceptors } from '@nestjs/common'
 
 // 序列化，响应排除 数据
