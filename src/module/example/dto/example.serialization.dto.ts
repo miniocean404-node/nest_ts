@@ -1,7 +1,7 @@
 import { CreateTestDto } from '@/module/example/dto/create-example.dto'
 import { Exclude, Expose, Transform } from 'class-transformer'
 
-export class UserEntity {
+export class ExampleSerializationEntity {
   id: number
   firstName: string
   lastName: string
@@ -20,7 +20,7 @@ export class UserEntity {
     return `${this.firstName} ${this.lastName}`
   }
 
-  constructor(partial: Partial<UserEntity>) {
+  constructor(partial: Partial<ExampleSerializationEntity>) {
     Object.assign(this, partial)
   }
 }

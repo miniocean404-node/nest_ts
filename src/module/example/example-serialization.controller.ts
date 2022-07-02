@@ -1,5 +1,5 @@
 import { NoAuth } from '@/common/decorator/custom'
-import { UserEntity } from '@/module/example/dto/example.serialization.dto'
+import { ExampleSerializationEntity } from '@/module/example/dto/example.serialization.dto'
 import { ClassSerializerInterceptor, Controller, Get, SerializeOptions, UseInterceptors } from '@nestjs/common'
 
 // 序列化，响应排除 数据
@@ -13,8 +13,8 @@ export class ExampleSerializationController {
   })
   @Get()
   @NoAuth()
-  findOne(): UserEntity {
-    return new UserEntity({
+  findOne(): ExampleSerializationEntity {
+    return new ExampleSerializationEntity({
       id: 1,
       firstName: 'Kamil',
       lastName: 'Mysliwiec',
