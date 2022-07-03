@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   // JWT验证 - Step 4: 被守卫调用
   validate(payload: any) {
-    console.log(`JWT验证 - Step 4: 被守卫调用`)
+    console.log(`JWT验证 - Step 4: 被守卫调用\r\n`)
     const { sub, username, realName, role } = payload
 
     return {

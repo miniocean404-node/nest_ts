@@ -1,6 +1,4 @@
-import { NoAuth } from '@/common/decorator/custom'
-import { JwtAuthGuard } from '@/common/guard/jwt.auth.guard'
-import { Controller, Get, Inject, UseGuards } from '@nestjs/common'
+import { Controller, Get, Inject } from '@nestjs/common'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { Logger } from 'winston'
 
