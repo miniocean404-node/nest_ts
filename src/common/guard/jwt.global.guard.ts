@@ -19,9 +19,7 @@ export class JwtGlobalGuard implements CanActivate {
     // 在这里取 metadata 中的no-auth，得到的会是一个 bool
     const noAuth = this.reflector.get<boolean>('no-auth', decorated)
 
-    if (noAuth) {
-      return true
-    }
+    if (noAuth) return true
 
     // 获取登录的注解
     const loginAuth = this.reflector.get<boolean>('login-auth', decorated)

@@ -22,6 +22,7 @@ import { ExampleStreamController } from './example-stream.controller'
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
+import { ExampleCsrfController } from './example-csrf.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -55,6 +56,7 @@ const exampleProvide = {
     ExampleQueueController,
     ExampleEmailController,
     ExampleLoggerController,
+    ExampleCsrfController,
   ],
   providers: [
     ExampleService,

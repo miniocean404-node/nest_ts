@@ -18,7 +18,6 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
-import { CsrfModule } from './module/csrf/csrf.module'
 
 // 根模块
 @Module({
@@ -104,7 +103,6 @@ import { CsrfModule } from './module/csrf/csrf.module'
     UserModule,
     FileModule,
     ExampleModule,
-    CsrfModule,
   ],
   // 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应(按构造函数循序写)
   controllers: [AppController],
