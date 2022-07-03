@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 // 用于装饰整个类，使其变成一个数据库模型
 @Entity()
-export class User {
+export class UserEntity {
   // 则是装饰主列，它的值将自动生成
   @PrimaryGeneratedColumn()
   id?: number

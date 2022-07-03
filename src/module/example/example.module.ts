@@ -8,6 +8,7 @@ import { ExampleCookieController } from './example-cookie.controller'
 import { ExampleEmailController } from './example-email.controller'
 import { ExampleEmailService } from './example-email.service'
 import { ExampleEventController } from './example-event.controller'
+import { ExampleLoggerController } from './example-logger.controller'
 import { ExampleMethodController } from './example-method.controller'
 import { ExampleQueueController } from './example-queue.controller'
 import { ExampleQueueService } from './example-queue.service'
@@ -21,7 +22,6 @@ import { ExampleStreamController } from './example-stream.controller'
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
-import { ExampleLoggerController } from './example-logger.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
