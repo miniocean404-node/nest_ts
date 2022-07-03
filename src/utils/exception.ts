@@ -1,22 +1,22 @@
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 class CustomExceptionError extends HttpException {
-  private static readonly message = '自定义错误'
+  private static readonly msg = '自定义错误'
 
   constructor(private readonly objectOrError: object, private readonly code?: number) {
-    const message = CustomExceptionError.message
+    const msg = CustomExceptionError.msg
 
     const errRes = {
       data: null,
       code,
-      message,
+      msg,
       timestamp: new Date().getTime(),
       ...objectOrError,
     }
 
     const errCode = code || HttpStatus.OK
 
-    super(HttpException.createBody(errRes, message, errCode), errCode)
+    super(HttpException.createBody(errRes, msg, errCode), errCode)
   }
 }
 

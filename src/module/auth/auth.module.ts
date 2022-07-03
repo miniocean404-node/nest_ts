@@ -1,13 +1,14 @@
 import { JWT_EXPIRES_IN, JWT_SECRET } from '@/config/constant/jwt'
+import { UserModule } from '@/module/user/user.module'
 // 其他模块
 import { UserService } from '@/module/user/user.service'
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 // 本文件夹
+import { JwtStrategy } from '@/common/guard/jwt.strategy'
+import { LocalStrategy } from '@/common/guard/local.strategy'
 import { AuthService } from './auth.service'
-import { JwtStrategy } from './jwt.strategy'
-import { LocalStrategy } from './local.strategy'
 
 @Module({
   imports: [
@@ -17,8 +18,9 @@ import { LocalStrategy } from './local.strategy'
       secret: JWT_SECRET,
       signOptions: { expiresIn: JWT_EXPIRES_IN }, // token 过期时效
     }),
+    UserModule,
   ],
-  providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, UserService],
   exports: [AuthService, LocalStrategy],
 })
 export class AuthModule {}

@@ -1,5 +1,6 @@
 import { NoAuth } from '@/common/decorator/custom'
-import { Controller, Get, Inject } from '@nestjs/common'
+import { JwtAuthGuard } from '@/common/guard/jwt.auth.guard'
+import { Controller, Get, Inject, UseGuards } from '@nestjs/common'
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { Logger } from 'winston'
 
@@ -10,7 +11,6 @@ export class ExampleLoggerController {
   private readonly logger: Logger
 
   @Get('logger')
-  @NoAuth()
   logTest() {
     this.logger.info(`日志 -> ${JSON.stringify(1)}`)
     return { msg: '日志打印成功' }

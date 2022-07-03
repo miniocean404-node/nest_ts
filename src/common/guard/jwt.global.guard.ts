@@ -18,23 +18,23 @@ export class JwtGlobalGuard implements CanActivate {
 
     // 在这里取 metadata 中的no-auth，得到的会是一个 bool
     const noAuth = this.reflector.get<boolean>('no-auth', decorated)
-
     if (noAuth) return true
 
     // 获取登录的注解
-    const loginAuth = this.reflector.get<boolean>('login-auth', decorated)
+    const jwtAuth = this.reflector.get<boolean>('jwt-auth', decorated)
 
-    const guard = JwtGlobalGuard.getAuthGuard(loginAuth)
-    // 执行所选策略Guard的canActivate方法
+    const guard = JwtGlobalGuard.getAuthGuard(jwtAuth || true)
+
+    // 执行所选策略 Guard 的 canActivate 方法
     return guard.canActivate(context)
   }
 
   // 根据NoAuth的t/f选择合适的策略Guard
-  private static getAuthGuard(loginAuth: boolean): IAuthGuard {
-    if (loginAuth) {
-      return new LocalAuthGuard()
-    } else {
+  private static getAuthGuard(jwtAuth: boolean): IAuthGuard {
+    if (jwtAuth) {
       return new JwtAuthGuard()
+    } else {
+      return new LocalAuthGuard()
     }
   }
 }

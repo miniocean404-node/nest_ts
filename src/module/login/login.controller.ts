@@ -1,18 +1,17 @@
 import { NoAuth } from '@/common/decorator/custom'
+import { LocalAuthGuard } from '@/common/guard/local.auth.guard'
+import { LocalStrategy } from '@/common/guard/local.strategy'
 import { AuthService } from '@/module/auth/auth.service'
+import { LoginDto } from '@/module/login/dto/login.dto'
+import { RegisterDto } from '@/module/login/dto/register.dto'
 import { UserService } from '@/module/user/user.service'
-import CustomExceptionError from '@/utils/exception'
-import { Body, Controller, HttpStatus, Post, UseGuards } from '@nestjs/common'
-import { AuthGuard } from '@nestjs/passport'
+import { Body, Controller, Post, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { LocalStrategy } from './../auth/local.strategy'
-import { LoginService } from './login.service'
 
-@ApiTags('登录')
+@ApiTags('登录注册')
 @Controller('login')
 export class LoginController {
   constructor(
-    private readonly service: LoginService,
     private readonly usersService: UserService,
     // 使用 AuthService 校验用户
     private readonly authService: AuthService,
@@ -20,35 +19,31 @@ export class LoginController {
     private readonly localStrategy: LocalStrategy
   ) {}
 
+  /**
+   * 登录获取 token
+   * @param param0
+   * @returns
+   */
   @NoAuth()
-  @Post('getToken')
-  async login(@Body() { username, password }: any) {
-    console.log('JWT验证 - Step 1: 用户请求登录')
+  @Post('login')
+  @UseGuards(LocalAuthGuard) // 使用 'Local' 进行验证 方式 1
+  // @UseGuards(AuthGuard('local')) // 使用 'Local' 进行验证 方式 2
+  async login(@Body() { username, password }: LoginDto) {
+    // 使用 'Local' 进行验证 方式 3
+    const user = await this.localStrategy.validate(username, password)
+    const token = await this.authService.certificate(user)
 
-    const authResult = await this.authService.validateUser(username, password)
-
-    switch (authResult.code) {
-      case 1:
-        // 获取token
-        return this.authService.certificate(authResult.user)
-      case 2:
-        throw new CustomExceptionError(
-          {
-            code: 600,
-            msg: `账号或密码不正确`,
-          },
-          HttpStatus.BAD_REQUEST
-        )
-
-      default:
-        return { data: [] }
-    }
+    return { data: { Authorization: `bearer ${token}` } }
   }
 
+  /**
+   * 注册
+   * @param body
+   * @returns
+   */
   @NoAuth()
-  @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
   @Post('register')
-  async register(@Body() body: any) {
+  async register(@Body() body: RegisterDto) {
     return await this.usersService.register(body)
   }
 }

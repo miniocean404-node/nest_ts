@@ -1,15 +1,15 @@
+import { UserModule } from '@/module/user/user.module'
 import { Module } from '@nestjs/common'
 
-import { UserService } from '@/module/user/user.service'
 import { AuthModule } from '@/module/auth/auth.module'
+import { UserService } from '@/module/user/user.service'
 
 import { LoginController } from './login.controller'
-import { LoginService } from './login.service'
 
 @Module({
   // 不导入AuthService是因为：AuthService中还使用了JwtService,import会将其一起导入
-  imports: [AuthModule],
+  imports: [AuthModule, UserModule],
   controllers: [LoginController],
-  providers: [LoginService, UserService],
+  providers: [UserService],
 })
 export class LoginModule {}

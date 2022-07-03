@@ -1,6 +1,6 @@
 import { NoAuth } from '@/common/decorator/custom'
-import { ExampleSerializationEntity } from '@/db/example-serialization.entity'
 import { ClassSerializerInterceptor, Controller, Get, SerializeOptions, UseInterceptors } from '@nestjs/common'
+import { ExampleSerializationEntity } from './serialization/example-serialization.entity'
 
 // 序列化，响应排除 数据
 @Controller('example-serialization')
