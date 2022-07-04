@@ -12,4 +12,6 @@ app模块导入是为了注册模块的单例及路由
 代表模块导出了，但是在AuthModule模块并没有imports导入或者providers中使用
 
 
+monorepo 模式: https://docs.nestjs.cn/8/cli?id=%e6%a6%82%e8%bf%b0
+
 skvnsoajdzsdbfhb
