@@ -1,25 +1,25 @@
 {
-	"compilerOptions": {
-		"outDir": "./dist",
-		"baseUrl": "./",
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"module": "commonjs",
-		"declaration": true,
-		"removeComments": true,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"allowSyntheticDefaultImports": true, //可以导入export = {} 模块
-		"esModuleInterop": true, // 可以使用import 导入commonjs模块
-		"target": "es2017",
-		"sourceMap": true,
-		"incremental": true,
-		"skipLibCheck": true,
-		"strictNullChecks": false,
-		"noImplicitAny": false,
-		"strictBindCallApply": false,
-		"forceConsistentCasingInFileNames": false,
-		"noFallthroughCasesInSwitch": false
-	}
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["apps/nest-core/src/*", "apps/nest-microservices/src/*"]
+    },
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  }
 }

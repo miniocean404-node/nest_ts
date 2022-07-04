@@ -7,7 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "set NODE_ENV=development && nest start",
-    "start:dev": "set NODE_ENV=development && nest start --watch",
+    "start-core:dev": "set NODE_ENV=development && nest start nest-core --watch",
+    "start-microservices:dev": "set NODE_ENV=development && nest start nest-microservices --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "build": "nest build",
@@ -18,7 +19,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./apps/nest-core/test/jest-e2e.json",
     "create-moudle": "nest g mo module/posts",
     "create-controller": "nest g co module/posts",
     "create-child-controller": "nest g co module/example/example-test --no-spec --flat",
@@ -115,7 +116,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -123,7 +124,10 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/apps/"
+    ]
   }
 }
