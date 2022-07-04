@@ -38,7 +38,7 @@ export class CustomGlobalExceptionFilter<T> implements ExceptionFilter {
       {
         data: null,
         code: status,
-        message: exception['message'],
+        msg: exception['message'],
         timestamp: new Date().getTime(),
         path: httpAdapter.getRequestUrl(request),
       },

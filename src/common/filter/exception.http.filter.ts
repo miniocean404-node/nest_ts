@@ -15,7 +15,7 @@ export class HttpExceptionFilter<T extends HttpException> implements ExceptionFi
 
     const errorResponse = verifyRes || {
       data: null,
-      message: msg,
+      msg,
       code: status,
       timestamp: new Date().getTime(),
     }
