@@ -1,12 +1,15 @@
 ///jwt.auth.guard.ts
+import CustomExceptionError from '@/utils/exception'
 import { ExecutionContext, Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'
 import { Observable } from 'rxjs'
-
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
+  private readonly jwtService: JwtService
   constructor() {
     super()
+    this.jwtService = new JwtService()
   }
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
@@ -15,7 +18,16 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
     const req: Request = context.switchToHttp().getRequest()
 
-    const token = req.headers['authorization']
+    const token: string = req.headers['authorization']
+    const noBearerToken = token?.split(' ')[1]
+
+    const result = this.jwtService.decode(noBearerToken)
+
+    if (result) {
+      return true
+    } else if (!result) {
+      throw new CustomExceptionError({ msg: 'token 校验失败' }, 400)
+    }
 
     return super.canActivate(context)
   }
