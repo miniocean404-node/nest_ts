@@ -23,11 +23,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
     const result = this.jwtService.decode(noBearerToken)
 
-    if (result) {
-      return true
-    } else if (!result) {
-      throw new CustomExceptionError({ msg: 'token 校验失败' }, 400)
-    }
+    if (result) return true
+    if (!result) throw new CustomExceptionError({ msg: 'token 校验失败' }, 400)
 
     return super.canActivate(context)
   }
