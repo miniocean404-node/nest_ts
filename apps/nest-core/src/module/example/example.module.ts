@@ -2,14 +2,17 @@ import { CacheModule, Module } from '@nestjs/common'
 
 import { HttpModule } from '@nestjs/axios'
 import { BullModule } from '@nestjs/bull'
+import { ClientsModule, Transport } from '@nestjs/microservices'
 import { ExampleAxiosService } from './example-axios.service'
 import { ExampleCacheController } from './example-cache.controller'
 import { ExampleCookieController } from './example-cookie.controller'
+import { ExampleCsrfController } from './example-csrf.controller'
 import { ExampleEmailController } from './example-email.controller'
 import { ExampleEmailService } from './example-email.service'
 import { ExampleEventController } from './example-event.controller'
 import { ExampleLoggerController } from './example-logger.controller'
 import { ExampleMethodController } from './example-method.controller'
+import { ExampleMicroserviceBaseClientController } from './example-microservice-base-client.controller'
 import { ExampleQueueController } from './example-queue.controller'
 import { ExampleQueueService } from './example-queue.service'
 import { ExampleRouteController } from './example-route.controller'
@@ -22,7 +25,6 @@ import { ExampleStreamController } from './example-stream.controller'
 import { ExampleVersionController } from './example-version.controller'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
-import { ExampleCsrfController } from './example-csrf.controller';
 
 const exampleProvide = {
   provide: 'InjectName',
@@ -39,6 +41,16 @@ const exampleProvide = {
       name: 'queue',
       // configKey: 'example-queue', // 命名配置 搭配 BullModule.forRoot('example-queue', {})
     }),
+    ClientsModule.register([
+      {
+        name: 'NEST_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: '127.0.0.1',
+          port: 4000,
+        },
+      },
+    ]),
   ],
   controllers: [
     ExampleController,
@@ -57,6 +69,7 @@ const exampleProvide = {
     ExampleEmailController,
     ExampleLoggerController,
     ExampleCsrfController,
+    ExampleMicroserviceBaseClientController,
   ],
   providers: [
     ExampleService,

@@ -1,5 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
-import { NestMicroservicesService } from './nest-microservices.service';
+import { Controller, Get } from '@nestjs/common'
+import { NestMicroservicesService } from './nest-microservices.service'
 
 @Controller()
 export class NestMicroservicesController {
@@ -7,6 +7,6 @@ export class NestMicroservicesController {
 
   @Get()
   getHello(): string {
-    return this.nestMicroservicesService.getHello();
+    return this.nestMicroservicesService.getHello()
   }
 }
