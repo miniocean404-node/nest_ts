@@ -1,4 +1,4 @@
-import { AuthService } from '@/module/auth/auth.service'
+import { AuthService } from '@app/nest-core/module/auth/auth.service'
 import { Injectable, NestMiddleware } from '@nestjs/common'
 
 @Injectable()

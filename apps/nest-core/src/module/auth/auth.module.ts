@@ -1,13 +1,13 @@
-import { JWT_EXPIRES_IN, JWT_SECRET } from '@/config/constant/jwt'
-import { UserModule } from '@/module/user/user.module'
+import { JWT_EXPIRES_IN, JWT_SECRET } from '@app/nest-core/config/constant/jwt'
+import { UserModule } from '@app/nest-core/module/user/user.module'
 // 其他模块
-import { UserService } from '@/module/user/user.service'
+import { UserService } from '@app/nest-core/module/user/user.service'
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 // 本文件夹
-import { JwtStrategy } from '@/common/guard/jwt.strategy'
-import { LocalStrategy } from '@/common/guard/local.strategy'
+import { JwtStrategy } from '@app/nest-core/common/guard/jwt.strategy'
+import { LocalStrategy } from '@app/nest-core/common/guard/local.strategy'
 import { AuthService } from './auth.service'
 
 @Module({

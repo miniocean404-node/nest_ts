@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "set NODE_ENV=development && nest start",
-    "start-core:dev": "set NODE_ENV=development && nest start nest-core --watch",
+    "start-core:dev": "set NODE_ENV=development && nest start --watch",
     "start-microservices:dev": "set NODE_ENV=development && nest start nest-microservices --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",

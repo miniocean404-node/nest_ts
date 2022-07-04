@@ -1,8 +1,8 @@
-import { UserModule } from '@/module/user/user.module'
+import { UserModule } from '@app/nest-core/module/user/user.module'
 import { Module } from '@nestjs/common'
 
-import { AuthModule } from '@/module/auth/auth.module'
-import { UserService } from '@/module/user/user.service'
+import { AuthModule } from '@app/nest-core/module/auth/auth.module'
+import { UserService } from '@app/nest-core/module/user/user.service'
 
 import { LoginController } from './login.controller'
 

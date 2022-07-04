@@ -3,7 +3,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["apps/nest-core/src/*", "apps/nest-microservices/src/*"]
+      "@app/nest-core/*": ["apps/nest-core/src/*"],
+      "@app/nest-microservices/*": ["apps/nest-microservices/src/*"]
     },
     "module": "commonjs",
     "declaration": true,

@@ -1,5 +1,5 @@
-import { NoAuth } from '@/common/decorator/custom'
-import { ExampleQueueService } from '@/module/example/example-queue.service'
+import { NoAuth } from '@app/nest-core/common/decorator/custom'
+import { ExampleQueueService } from '@app/nest-core/module/example/example-queue.service'
 import { Controller, Get } from '@nestjs/common'
 
 @Controller('example-queue')

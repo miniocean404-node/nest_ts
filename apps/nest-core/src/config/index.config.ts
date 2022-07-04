@@ -1,10 +1,10 @@
-import cacheConfig from '@/config/cache.config'
-import dbConfig from '@/config/db.config'
-import nestConfig from '@/config/dotenv.config'
-import emailConfig from '@/config/email.config'
-import winstonConfig from '@/config/logger.config'
-import queueConfig from '@/config/queue.config'
-export { default as eventConfig } from '@/config/event.config'
+import cacheConfig from '@app/nest-core/config/cache.config'
+import dbConfig from '@app/nest-core/config/db.config'
+import nestConfig from '@app/nest-core/config/dotenv.config'
+import emailConfig from '@app/nest-core/config/email.config'
+import winstonConfig from '@app/nest-core/config/logger.config'
+import queueConfig from '@app/nest-core/config/queue.config'
+export { default as eventConfig } from '@app/nest-core/config/event.config'
 
 const allCofnig = [nestConfig, emailConfig, cacheConfig, queueConfig, dbConfig, winstonConfig]
 

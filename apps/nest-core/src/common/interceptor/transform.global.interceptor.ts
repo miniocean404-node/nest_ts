@@ -1,4 +1,4 @@
-import type { InterceptorRes } from '@/typings/interceptor'
+import type { InterceptorRes } from '@app/nest-core/typings/interceptor'
 import { CallHandler, ExecutionContext, HttpStatus, Injectable, NestInterceptor } from '@nestjs/common'
 import { map, Observable } from 'rxjs'
 @Injectable()

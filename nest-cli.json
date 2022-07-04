@@ -3,9 +3,16 @@
   "sourceRoot": "apps/nest-core/src",
   "monorepo": true,
   "root": "apps/nest-core",
+  "assets": ["**/*.entity.(ts,js)"],
+  "watchAssets": true,
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/nest-core/tsconfig.app.json"
+    "tsConfigPath": "apps/nest-core/tsconfig.app.json",
+    "deleteOutDir": "./dist",
+    "watchAssets": false
+  },
+  "generateOptions": {
+    "spec": false
   },
   "projects": {
     "nest-core": {

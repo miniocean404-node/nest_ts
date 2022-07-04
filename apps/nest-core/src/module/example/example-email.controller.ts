@@ -1,4 +1,4 @@
-import { NoAuth } from '@/common/decorator/custom'
+import { NoAuth } from '@app/nest-core/common/decorator/custom'
 import { Controller, Get } from '@nestjs/common'
 import { ExampleEmailService } from './example-email.service'
 

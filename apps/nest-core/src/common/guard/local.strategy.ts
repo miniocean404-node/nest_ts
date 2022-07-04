@@ -1,5 +1,5 @@
-import CustomExceptionError from '@/common/filter/exception.custom'
-import { AuthService } from '@/module/auth/auth.service'
+import CustomExceptionError from '@app/nest-core/common/filter/exception.custom'
+import { AuthService } from '@app/nest-core/module/auth/auth.service'
 import { Injectable } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy } from 'passport-local'

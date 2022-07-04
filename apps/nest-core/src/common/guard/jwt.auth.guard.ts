@@ -1,5 +1,5 @@
 ///jwt.auth.guard.ts
-import CustomExceptionError from '@/common/filter/exception.custom'
+import CustomExceptionError from '@app/nest-core/common/filter/exception.custom'
 import { ExecutionContext, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { AuthGuard } from '@nestjs/passport'

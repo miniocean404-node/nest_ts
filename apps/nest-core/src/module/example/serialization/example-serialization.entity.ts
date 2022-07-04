@@ -1,4 +1,4 @@
-import { CreateTestDto } from '@/module/example/dto/create-example.dto'
+import { CreateTestDto } from '@app/nest-core/module/example/dto/create-example.dto'
 import { Exclude, Expose, Transform } from 'class-transformer'
 
 export class ExampleSerializationEntity {

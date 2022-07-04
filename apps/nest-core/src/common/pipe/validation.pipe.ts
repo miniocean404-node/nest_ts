@@ -1,4 +1,4 @@
-import CustomExceptionError from '@/common/filter/exception.custom'
+import CustomExceptionError from '@app/nest-core/common/filter/exception.custom'
 import { ArgumentMetadata, HttpStatus, Injectable, PipeTransform } from '@nestjs/common'
 import { plainToInstance } from 'class-transformer'
 import { validate } from 'class-validator'

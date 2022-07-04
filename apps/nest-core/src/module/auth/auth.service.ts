@@ -1,6 +1,6 @@
-import { UserEntity } from '@/db/user.entity'
-import { UserService } from '@/module/user/user.service'
-import { encryptPassword } from '@/utils/encrypt'
+import { UserEntity } from '@app/nest-core/db/user.entity'
+import { UserService } from '@app/nest-core/module/user/user.service'
+import { encryptPassword } from '@app/nest-core/utils/encrypt'
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 

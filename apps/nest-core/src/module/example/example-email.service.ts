@@ -1,4 +1,4 @@
-import { phoneCode } from '@/utils/verification-code'
+import { phoneCode } from '@app/nest-core/utils/verification-code'
 import { MailerService } from '@nestjs-modules/mailer'
 import { Injectable } from '@nestjs/common'
 import dayjs from 'dayjs'

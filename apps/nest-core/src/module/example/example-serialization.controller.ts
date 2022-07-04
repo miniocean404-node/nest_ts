@@ -1,4 +1,4 @@
-import { NoAuth } from '@/common/decorator/custom'
+import { NoAuth } from '@app/nest-core/common/decorator/custom'
 import { ClassSerializerInterceptor, Controller, Get, SerializeOptions, UseInterceptors } from '@nestjs/common'
 import { ExampleSerializationEntity } from './serialization/example-serialization.entity'
 

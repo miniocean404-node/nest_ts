@@ -1,4 +1,4 @@
-import { templatesPath } from '@/utils/path'
+import { templatesPath } from '@app/nest-core/utils/path'
 import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
 import { registerAs } from '@nestjs/config'
 
