@@ -11,13 +11,13 @@ export class ExampleMicroserviceBaseController {
 
   // 返回 Rx Observable，因此这些值将被发出，直到流完成
   @MessagePattern({ cmd: 'hello2' })
-  observableAccumulate(): Observable<number> {
+  observableAccumulate(data: number[]): Observable<number> {
     return from([1, 2, 3])
   }
 
   @EventPattern('user_created')
   async handleUserCreated(data: Record<string, unknown>) {
-    // business logic
+    return data.msg
   }
 
   @MessagePattern('time.us.*')

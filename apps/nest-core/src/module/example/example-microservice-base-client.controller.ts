@@ -18,7 +18,9 @@ export class ExampleMicroserviceBaseClientController {
 
   // 发布事件
   @Get('event')
-  async publish() {
-    this.client.emit<number>('user_created', { test: 1 })
+  async publish(): Promise<Observable<string>> {
+    const result = this.client.emit<string>('user_created', { msg: '事件发送成功' }).pipe(timeout(3000))
+
+    return this.client.emit<string>('user_created', { msg: '事件发送成功' }).pipe(timeout(3000))
   }
 }
