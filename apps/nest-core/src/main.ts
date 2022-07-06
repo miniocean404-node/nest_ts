@@ -6,7 +6,8 @@ import { TimeoutInterceptor } from '@app/nest-core/common/interceptor/timeout.in
 import { TransformInterceptor } from '@app/nest-core/common/interceptor/transform.global.interceptor'
 import middleware from '@app/nest-core/common/middleware/global_middleware'
 import { CustomValidationPipe } from '@app/nest-core/common/pipe/validation.pipe'
-import { publicPath, viewsPath } from '@app/nest-core/utils/path'
+import { publicPath, viewsPath } from '@app/nest-core/config/constant/path'
+import VIRTUAL_PATH from '@app/nest-core/config/constant/router-path.enum'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
@@ -16,13 +17,13 @@ import chalk from 'chalk'
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {})
 
-  app.setGlobalPrefix('api/nest')
+  app.setGlobalPrefix(VIRTUAL_PATH.API)
   app.enableVersioning({
     // 默认情况下，URI 中的版本将自动以 v 为前缀
     // 可以使用 VersioningType.HEADER 请求头控制 type: VersioningType.HEADER, header: 'Custom-Header',
     // 可以使用 Accept 请求的标头 指定版本 type: VersioningType.MEDIA_TYPE， key: 'v=', 例如头: Accept: application/json;v=2
     type: VersioningType.URI,
-    defaultVersion: '1', // 全局版本 支持三种, '1'、['1', '2']、VERSION_NEUTRAL
+    defaultVersion: VIRTUAL_PATH.VERSION, // 全局版本 支持三种, '1'、['1', '2']、VERSION_NEUTRAL
   })
 
   app.enableCors({
@@ -54,7 +55,7 @@ async function bootstrap() {
 
   // 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
   // app.use('/public', express.static(join(rootDir, 'public')));
-  app.useStaticAssets(publicPath, { prefix: '/public' })
+  app.useStaticAssets(publicPath, { prefix: VIRTUAL_PATH.STATIC_ASSETS })
   // mvc 渲染 类似 jsp
   app.setBaseViewsDir(viewsPath)
 
@@ -68,14 +69,16 @@ async function bootstrap() {
     .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('doc', app, document)
+  SwaggerModule.setup(VIRTUAL_PATH.SWAGGERDOC, app, document)
 
   await app.listen(3000)
 
   console.log('\r\n')
-  console.log(chalk.blue('接口地址:http://localhost:3000/api/nest/v1'))
-  console.log(chalk.blue('MVC渲染:http://localhost:3000/api/nest/v1/app'))
-  console.log(chalk.blue('接口文档:http://localhost:3000/doc'))
+  console.log(chalk.blue(`接口地址: http://localhost:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}`))
+  console.log(chalk.blue(`MVC渲染: http://localhost:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}/app`))
+  console.log(chalk.blue(`接口文档: http://localhost:3000/${VIRTUAL_PATH.SWAGGERDOC}`))
+  console.log(chalk.blue(`SPA 渲染路径: http://localhost:3000/${VIRTUAL_PATH.SPA_RENDER}`))
+  console.log(chalk.blue(`静态资源路径: http://localhost:3000/${VIRTUAL_PATH.STATIC_ASSETS}/upload/日期文件夹/文件名.ext`))
 }
 
 bootstrap().then()

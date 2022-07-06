@@ -1,3 +1,5 @@
+import VIRTUAL_PATH from '@app/nest-core/config/constant/router-path.enum'
+import { clientPath } from './config/constant/path'
 // import { TypeOrmModule } from '@nestjs/typeorm'
 import { JwtMiddleware } from '@app/nest-core/common/middleware/jwt.middleware'
 import eventConfig from '@app/nest-core/config/event.config'
@@ -14,11 +16,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { APP_INTERCEPTOR } from '@nestjs/core'
 import { EventEmitterModule } from '@nestjs/event-emitter'
 import { ScheduleModule } from '@nestjs/schedule'
+import { ServeStaticModule } from '@nestjs/serve-static'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
-
 // 根模块
 @Module({
   // imports 导入模块相当于导入这个模块所有的（包括这个模块导入的其他模块 包括：providers、imports）
@@ -96,6 +98,32 @@ import { AppController } from './app.controller'
         return config.get('cache')
       },
     }),
+
+    // SPA 静态网站并将其内容放置在rootPath属性指定的位置。
+    ServeStaticModule.forRoot({
+      // 静态文件根目录
+      rootPath: clientPath,
+      // 将提供静态应用程序的根路径
+      serveRoot: `/${VIRTUAL_PATH.SPA_RENDER}`,
+      // 呈现静态应用程序的路径（与serveRoot值连接）。默认值：*（通配符 - 所有路径）。
+      renderPath: '*',
+      // 提供静态应用程序时要排除的路径
+      exclude: ['/api/nest/*', ''],
+    }),
+
+    // 路由器模块
+    // RouterModule.register([
+    //   {
+    //     path: 'admin',
+    //     module: parentModole,
+    //     children: [
+    //       {
+    //         path: 'dashboard',
+    //         module: childModole,
+    //       },
+    //     ],
+    //   },
+    // ]),
 
     // 业务模块
     LoginModule,

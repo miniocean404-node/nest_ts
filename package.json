@@ -28,7 +28,8 @@
     "create-interceptor": "nest g interceptor interceptor/transform",
     "create-middleware": "nest g middleware logger middleware",
     "create-guard": "nest g gu jwt guard",
-    "create-pipe": "nest g pi name pipe"
+    "create-pipe": "nest g pi name pipe",
+    "create-crud": "nest g resource name"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.7.1",
@@ -42,6 +43,8 @@
     "@nestjs/platform-express": "^8.4.6",
     "@nestjs/platform-socket.io": "^8.4.7",
     "@nestjs/schedule": "^2.0.1",
+    "@nestjs/serve-static": "^2.2.2",
+    "@nestjs/terminus": "^8.1.1",
     "@nestjs/websockets": "^8.4.7",
     "@types/express-session": "^1.17.4",
     "ali-oss": "^6.17.1",
