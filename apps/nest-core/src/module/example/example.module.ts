@@ -23,6 +23,7 @@ import { ExampleSessionController } from './example-session.controller'
 import { ExampleSseController } from './example-sse.controller'
 import { ExampleStreamController } from './example-stream.controller'
 import { ExampleVersionController } from './example-version.controller'
+import { ExampleWebsoketGateway } from './example-websoket.gateway'
 import { ExampleController } from './example.controller'
 import { ExampleService } from './example.service'
 
@@ -78,6 +79,7 @@ const exampleProvide = {
     ExampleAxiosService,
     ExampleQueueService,
     ExampleEmailService,
+    ExampleWebsoketGateway,
   ],
 })
 export class ExampleModule {}
