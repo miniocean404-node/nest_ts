@@ -1,5 +1,5 @@
 import VIRTUAL_PATH from '@app/nest-core/config/constant/router-path.enum'
-import { clientPath } from './config/constant/path'
+import { CLIENT_PATH } from './config/constant/path'
 // import { TypeOrmModule } from '@nestjs/typeorm'
 import { JwtMiddleware } from '@app/nest-core/common/middleware/jwt.middleware'
 import eventConfig from '@app/nest-core/config/event.config'
@@ -102,7 +102,7 @@ import { AppController } from './app.controller'
     // SPA 静态网站并将其内容放置在rootPath属性指定的位置。
     ServeStaticModule.forRoot({
       // 静态文件根目录
-      rootPath: clientPath,
+      rootPath: CLIENT_PATH,
       // 将提供静态应用程序的根路径
       serveRoot: `/${VIRTUAL_PATH.SPA_RENDER}`,
       // 呈现静态应用程序的路径（与serveRoot值连接）。默认值：*（通配符 - 所有路径）。

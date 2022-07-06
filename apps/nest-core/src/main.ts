@@ -6,7 +6,7 @@ import { TimeoutInterceptor } from '@app/nest-core/common/interceptor/timeout.in
 import { TransformInterceptor } from '@app/nest-core/common/interceptor/transform.global.interceptor'
 import middleware from '@app/nest-core/common/middleware/global_middleware'
 import { CustomValidationPipe } from '@app/nest-core/common/pipe/validation.pipe'
-import { publicPath, viewsPath } from '@app/nest-core/config/constant/path'
+import { PBULIC_PATH, VIEW_PATH } from '@app/nest-core/config/constant/path'
 import VIRTUAL_PATH from '@app/nest-core/config/constant/router-path.enum'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
@@ -55,9 +55,9 @@ async function bootstrap() {
 
   // 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
   // app.use('/public', express.static(join(rootDir, 'public')));
-  app.useStaticAssets(publicPath, { prefix: VIRTUAL_PATH.STATIC_ASSETS })
+  app.useStaticAssets(PBULIC_PATH, { prefix: VIRTUAL_PATH.STATIC_ASSETS })
   // mvc 渲染 类似 jsp
-  app.setBaseViewsDir(viewsPath)
+  app.setBaseViewsDir(VIEW_PATH)
 
   app.setViewEngine('pug')
 

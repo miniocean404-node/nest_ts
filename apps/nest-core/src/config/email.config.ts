@@ -1,4 +1,4 @@
-import { templatesPath } from '@app/nest-core/config/constant/path'
+import { TEMPLATES_PATH } from '@app/nest-core/config/constant/path'
 import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter'
 import { registerAs } from '@nestjs/config'
 
@@ -27,7 +27,7 @@ const emailConfig = registerAs('email', () => ({
   },
   preview: true,
   template: {
-    dir: templatesPath,
+    dir: TEMPLATES_PATH,
     // 默认适配器中更改inline-css选项甚至禁用它
     adapter: new PugAdapter({
       inlineCssEnabled: true,
