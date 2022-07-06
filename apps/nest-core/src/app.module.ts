@@ -21,6 +21,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
+import { ExampleTypeormModule } from './module/example-typeorm/example-typeorm.module'
+
 // 根模块
 @Module({
   // imports 导入模块相当于导入这个模块所有的（包括这个模块导入的其他模块 包括：providers、imports）
@@ -131,6 +133,7 @@ import { AppController } from './app.controller'
     UserModule,
     FileModule,
     ExampleModule,
+    ExampleTypeormModule,
   ],
   // 必须创建的一组控制器 处理http请求，包括路由控制，向客户端返回响应(按构造函数循序写)
   controllers: [AppController],
