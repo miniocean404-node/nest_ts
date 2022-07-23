@@ -95,6 +95,7 @@ export abstract class Content {
   @Column()
   description: string
 }
+
 @Entity()
 export class Photo extends Content {
   @Column()
@@ -121,6 +122,10 @@ export class Category {
 
   @Column()
   name: string
+
+  // 嵌入式实体
+  @Column(() => Post)
+  merge: Post
 
   @Column()
   description: string
