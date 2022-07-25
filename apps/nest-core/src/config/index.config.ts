@@ -6,6 +6,6 @@ import winstonConfig from '@app/nest-core/config/logger.config'
 import queueConfig from '@app/nest-core/config/queue.config'
 export { default as eventConfig } from '@app/nest-core/config/event.config'
 
-const allCofnig = [nestConfig, emailConfig, cacheConfig, queueConfig, dbConfig, winstonConfig]
+const allConfig = [nestConfig, emailConfig, cacheConfig, queueConfig, dbConfig, winstonConfig]
 
-export default allCofnig
+export default allConfig

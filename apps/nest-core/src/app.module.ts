@@ -3,7 +3,7 @@ import { CLIENT_PATH } from './config/constant/path'
 // import { TypeOrmModule } from '@nestjs/typeorm'
 import { JwtMiddleware } from '@app/nest-core/common/middleware/jwt.middleware'
 import eventConfig from '@app/nest-core/config/event.config'
-import allCofnig from '@app/nest-core/config/index.config'
+import allConfig from '@app/nest-core/config/index.config'
 import { AuthModule } from '@app/nest-core/module/auth/auth.module'
 import { ExampleModule } from '@app/nest-core/module/example/example.module'
 import { FileModule } from '@app/nest-core/module/file/file.module'
@@ -34,7 +34,7 @@ import { ExampleTypeormModule } from './module/example-typeorm/example-typeorm.m
       isGlobal: true, // 全局模块加载 ConfigModule ,不需要在其他模块中导入
       cache: true, // 是否缓存
       expandVariables: true, // 启用环境变量扩展${}
-      load: allCofnig,
+      load: allConfig,
       // 校验是否符合规则，否则异常
       validationSchema: Joi.object({
         node_env: Joi.string().valid('development', 'production').default('development'),
