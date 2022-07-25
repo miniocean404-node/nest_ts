@@ -20,7 +20,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/nest-core/test/jest-e2e.json",
-    "create-moudle": "nest g mo module/posts",
+    "create-module": "nest g mo module/posts",
     "create-controller": "nest g co module/posts",
     "create-child-controller": "nest g co module/example/example-test --no-spec --flat",
     "create-service": "nest g s module/posts",
