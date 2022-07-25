@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Generated,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -18,35 +19,8 @@ export enum UserRole {
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number
-
-  // enum列类型
-  @Column({
-    type: 'enum',
-    enum: UserRole,
-    default: UserRole.GHOST,
-  })
-  role: UserRole
-
-  // set列类型
-  @Column({
-    type: 'set',
-    enum: UserRole,
-    default: [UserRole.GHOST, UserRole.EDITOR],
-  })
-  roles: UserRole[]
-
-  // simple-array列类型
-  // 您编写的值中不得有任何逗号。
-  @Column('simple-array')
-  names: string[]
-
-  // simple-json列类型
-  // const user = new User() user.profile = { name: "John", nickname: "Malkovich" }
-  // 将作为值存储在单个数据库列中{"name":"John","nickname":"Malkovich"}。当您从数据库加载数据时，您将通过 JSON.parse 返回您的对象/数组/原语
-  @Column('simple-json')
-  profile: { name: string; nickname: string }
 
   @Column({
     //   ColumnType- 列类型。上面列出的类型之一。
@@ -82,62 +56,41 @@ export class User {
     // transformer: '', // { from(value:,// DatabaseType):,// EntityType, to(value:,// EntityType):,// DatabaseType }- 用于将任意类型的属性编组为数据库支持的EntityType类型。DatabaseType还支持转换器数组，并且在写入时以自然顺序应用，在读取时以相反顺序应用。例如[lowercase, encrypt]，将首先小写字符串，然后在写入时对其进行加密，然后在读取时解密然后不执行任何操作。
   })
   name: string
+
+  // enum列类型
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.GHOST,
+  })
+  role: UserRole
+
+  // set列类型
+  @Column({
+    type: 'set',
+    enum: UserRole,
+    default: [UserRole.GHOST, UserRole.EDITOR],
+  })
+  roles: UserRole[]
+
+  // simple-array列类型
+  // 您编写的值中不得有任何逗号。
+  @Column('simple-array')
+  names: string[]
+
+  // simple-json列类型
+  // const user = new User() user.profile = { name: "John", nickname: "Malkovich" }
+  // 将作为值存储在单个数据库列中{"name":"John","nickname":"Malkovich"}。当您从数据库加载数据时，您将通过 JSON.parse 返回您的对象/数组/原语
+  @Column('simple-json')
+  profile: { name: string; nickname: string }
+
+  @Column()
+  @Generated('uuid')
+  uuid: string
 }
 
-// 实体继承
-export abstract class Content {
-  @PrimaryGeneratedColumn()
-  id: number
-
-  @Column()
-  title: string
-
-  @Column()
-  description: string
-}
-
-@Entity()
-export class Photo extends Content {
-  @Column()
-  size: string
-}
-
-@Entity()
-export class Question extends Content {
-  @Column()
-  answersCount: number
-}
-
-@Entity()
-export class Post extends Content {
-  @Column()
-  viewCount: number
-}
-
-// 邻接表
-@Entity()
-export class Category {
-  @PrimaryGeneratedColumn()
-  id: number
-
-  @Column()
-  name: string
-
-  // 嵌入式实体
-  @Column(() => Post)
-  merge: Post
-
-  @Column()
-  description: string
-
-  @ManyToOne((type) => Category, (category) => category.children)
-  parent: Category
-
-  @OneToMany((type) => Category, (category) => category.parent)
-  children: Category[]
-}
-
-// #闭包表
+// 闭包表
+// todo 未理解
 @Entity()
 @Tree('closure-table')
 export class Category1 {
@@ -151,11 +104,18 @@ export class Category1 {
   description: string
 
   @TreeChildren()
-  children: Category[]
+  children: Category2[]
 
   @TreeParent()
-  parent: Category
+  parent: Category2
 
   @TreeLevelColumn()
   level: number
+}
+
+// 邻接表，就是用唯一 id 进行链接外部表
+@Entity()
+export class Category2 {
+  @PrimaryGeneratedColumn()
+  id: number
 }

@@ -1,7 +1,9 @@
 import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm'
 
 // mysql / 的列类型mariadb
-// bit, int, integer, tinyint, smallint, mediumint, bigint, float, double, double precision, dec, decimal, numeric, fixed, bool, boolean, date, datetime, timestamp, time, year, char, nchar, national char, varchar, nvarchar, national varchar, , text, tinytext, mediumtext, blob, longtext, tinyblob, mediumblob, longblob, enum, set, json, binary, varbinary, geometry, point, linestring, polygon, multipoint, multilinestring, multipolygongeometrycollection
+// bit, int, integer, tinyint, smallint, mediumint, bigint, float, double, double precision, dec, decimal, numeric, fixed, bool, boolean, date, datetime, timestamp, time, year,
+// char, nchar, national char, varchar, nvarchar, national varchar, , text, tinytext, mediumtext, blob, longtext, tinyblob, mediumblob, longblob, enum, set, json, binary,
+// varbinary, geometry, point, linestring, polygon, multipoint, multilinestring, multipolygongeometrycollection
 
 // 用于装饰整个类，使其变成一个数据库表
 @Entity('user', { database: 'user' })
