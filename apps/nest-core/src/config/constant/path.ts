@@ -4,7 +4,7 @@ export const resolve = path.resolve
 export const ROOT_PATH = process.cwd()
 
 // 根目录下
-export const PBULIC_PATH = normalize(`${ROOT_PATH}/public`)
+export const PUBLIC_PATH = normalize(`${ROOT_PATH}/public`)
 export const CLIENT_PATH = normalize(`${ROOT_PATH}/client`)
 
 // src 目录下

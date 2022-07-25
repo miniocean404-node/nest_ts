@@ -1,7 +1,7 @@
 enum VIRTUAL_PATH {
   API = 'api/nest',
   VERSION = '1',
-  SWAGGERDOC = 'doc',
+  SWAGGER_DOC = 'doc',
   STATIC_ASSETS = 'public',
   SPA_RENDER = 'spa',
 }

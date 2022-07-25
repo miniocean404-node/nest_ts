@@ -6,7 +6,7 @@ import { TimeoutInterceptor } from '@app/nest-core/common/interceptor/timeout.in
 import { TransformInterceptor } from '@app/nest-core/common/interceptor/transform.global.interceptor'
 import middleware from '@app/nest-core/common/middleware/global_middleware'
 import { CustomValidationPipe } from '@app/nest-core/common/pipe/validation.pipe'
-import { PBULIC_PATH, VIEW_PATH } from '@app/nest-core/config/constant/path'
+import { PUBLIC_PATH, VIEW_PATH } from '@app/nest-core/config/constant/path'
 import VIRTUAL_PATH from '@app/nest-core/config/constant/router-path.enum'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
@@ -55,7 +55,7 @@ async function bootstrap() {
 
   // 配置 public 文件夹为静态目录，以达到可直接访问下面文件的目的
   // app.use('/public', express.static(join(rootDir, 'public')));
-  app.useStaticAssets(PBULIC_PATH, { prefix: VIRTUAL_PATH.STATIC_ASSETS })
+  app.useStaticAssets(PUBLIC_PATH, { prefix: VIRTUAL_PATH.STATIC_ASSETS })
   // mvc 渲染 类似 jsp
   app.setBaseViewsDir(VIEW_PATH)
 
@@ -69,14 +69,14 @@ async function bootstrap() {
     .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup(VIRTUAL_PATH.SWAGGERDOC, app, document)
+  SwaggerModule.setup(VIRTUAL_PATH.SWAGGER_DOC, app, document)
 
   await app.listen(3000)
 
   console.log('\r\n')
   console.log(chalk.blue(`接口地址: http://localhost:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}`))
   console.log(chalk.blue(`MVC渲染: http://localhost:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}/app`))
-  console.log(chalk.blue(`接口文档: http://localhost:3000/${VIRTUAL_PATH.SWAGGERDOC}`))
+  console.log(chalk.blue(`接口文档: http://localhost:3000/${VIRTUAL_PATH.SWAGGER_DOC}`))
   console.log(chalk.blue(`SPA 渲染路径: http://localhost:3000/${VIRTUAL_PATH.SPA_RENDER}`))
   console.log(chalk.blue(`静态资源路径: http://localhost:3000/${VIRTUAL_PATH.STATIC_ASSETS}/upload/日期文件夹/文件名.ext`))
 }
