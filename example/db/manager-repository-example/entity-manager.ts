@@ -124,4 +124,66 @@ async function useEntityManager() {
       firstName: 'Timber',
     },
   })
+
+  // countBy- 计算匹配的实体FindOptionsWhere。对分页很有用。
+  const count1 = await manager.countBy(User, { firstName: 'Timber' })
+
+  // find- 查找与给定匹配的实体FindOptions。
+  const timbers = await manager.find(User, {
+    where: {
+      firstName: 'Timber',
+    },
+  })
+
+  // findBy- 查找与给定匹配的实体FindWhereOptions。
+  const timbers1 = await manager.findBy(User, {
+    firstName: 'Timber',
+  })
+
+  // findAndCount- 查找与给定匹配的实体FindOptions。还计算与给定条件匹配的所有实体，但忽略分页设置（从和获取选项）。
+  const [timbers2, timbersCount] = await manager.findAndCount(User, {
+    where: {
+      firstName: 'Timber',
+    },
+  })
+
+  // findAndCountBy- 查找与给定匹配的实体FindOptionsWhere。还计算与给定条件匹配的所有实体，但忽略分页设置（从和获取选项）。
+  const [timbers3, timbersCount1] = await manager.findAndCount(User, {
+    firstName: 'Timber',
+  })
+
+  // findOne- 找到第一个匹配给定的实体FindOptions。
+  const timber = await manager.findOne(User, {
+    where: {
+      firstName: 'Timber',
+    },
+  })
+
+  // findOneBy- 找到第一个匹配给定的实体FindOptionsWhere。
+  const timber1 = await manager.findOne(User, { firstName: 'Timber' })
+
+  // findOneOrFail- 查找与某些 id 或查找选项匹配的第一个实体。如果没有匹配项，则拒绝返回的承诺。
+  const timber2 = await manager.findOneOrFail(User, {
+    where: {
+      firstName: 'Timber',
+    },
+  })
+
+  // findOneByOrFail- 找到第一个匹配给定的实体FindOptions。如果没有匹配项，则拒绝返回的承诺。
+  const timber3 = await manager.findOneByOrFail(User, { firstName: 'Timber' })
+
+  // clear- 清除给定表中的所有数据（截断/删除它）。
+  await manager.clear(User)
+
+  // getRepository- 获取Repository对特定实体执行操作。了解有关存储库的更多信息。
+  const userRepository = manager.getRepository(User)
+
+  // getTreeRepository- 获取TreeRepository对特定实体执行操作。了解有关存储库的更多信息。
+  const categoryRepository = manager.getTreeRepository(User)
+
+  // withRepository- 获取事务中使用的自定义存储库实例。了解有关自定义存储库的更多信息。
+  const myUserRepository = manager.withRepository(User)
+
+  // release- 发布实体管理器的查询运行器。仅在手动创建和管理查询运行器时使用。
+  await manager.release()
 }
