@@ -36,7 +36,10 @@ const dbConfig = registerAs('db', () => ({
   //数据库中将包含有关表元数据信息的表的名称。默认情况下，此表称为“typeorm_metadata”。
   metadataTableName: 'typeorm_metadata',
   // 启用实体结果缓存。您还可以在此处配置缓存类型和其他缓存选项
-  cache: true,
+  cache: {
+    type: 'database',
+    tableName: 'configurable-table-query-result-cache',
+  },
   // 通过路径自动导入实体
   // entities: [ENTITY_PATH],
   // 如果为true,将自动加载实体(默认：false) 每个通过forFeature()注册的实体都会自动添加到配置对象的entities数组中。
