@@ -14,6 +14,7 @@ export class ExampleTypeormService {
   async find(reqBody: RegisterDto): Promise<UserEntity | null> {
     try {
       const user1 = await this.userRep.findOne({ where: reqBody })
+
       return user1
     } catch (error) {
       return error

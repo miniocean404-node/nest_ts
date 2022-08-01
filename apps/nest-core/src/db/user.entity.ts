@@ -6,7 +6,7 @@ import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm'
 // varbinary, geometry, point, linestring, polygon, multipoint, multilinestring, multipolygongeometrycollection
 
 // 用于装饰整个类，使其变成一个数据库表
-@Entity('user', { database: 'user' })
+@Entity('user', { database: 'nest-dev' })
 export class UserEntity {
   // @PrimaryColumn() 它采用任何类型的任何值。您可以指定列类型。如果您不指定列类型，它将从属性类型中推断出来。int下面的示例将使用您必须在保存之前手动分配的类型创建 id 。
   // @PrimaryGeneratedColumn() 创建一个主列，其值将使用自动递增值自动生成。它将使用/ / /创建int列（取决于提供的数据库和配置）。您不必在保存之前手动分配其值 - 值将自动生成。auto-incrementserialsequenceidentity
@@ -20,6 +20,7 @@ export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id?: number
 
+  @Column()
   @Generated('uuid')
   uuid: string
 
