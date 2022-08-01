@@ -8,6 +8,7 @@ import middleware from '@app/nest-core/common/middleware/global_middleware'
 import { CustomValidationPipe } from '@app/nest-core/common/pipe/validation.pipe'
 import { PUBLIC_PATH, VIEW_PATH } from '@app/nest-core/config/constant/path'
 import VIRTUAL_PATH from '@app/nest-core/config/constant/router-path.enum'
+import { getIpAddress } from '@app/nest-core/utils/ip'
 import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
@@ -73,12 +74,15 @@ async function bootstrap() {
 
   await app.listen(3000)
 
+  const ip = getIpAddress()
+  const address = ip || 'localhost'
   console.log('\r\n')
-  console.log(chalk.blue(`接口地址: http://localhost:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}`))
-  console.log(chalk.blue(`MVC渲染: http://localhost:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}/app`))
-  console.log(chalk.blue(`接口文档: http://localhost:3000/${VIRTUAL_PATH.SWAGGER_DOC}`))
-  console.log(chalk.blue(`SPA 渲染路径: http://localhost:3000/${VIRTUAL_PATH.SPA_RENDER}`))
-  console.log(chalk.blue(`静态资源路径: http://localhost:3000/${VIRTUAL_PATH.STATIC_ASSETS}/upload/日期文件夹/文件名.ext`))
+  console.log(chalk.blue(`接口地址: http://${address}:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}`))
+  console.log(chalk.blue(`MVC渲染: http://${address}:3000/${VIRTUAL_PATH.API}/v${VIRTUAL_PATH.VERSION}/app`))
+  console.log(chalk.blue(`接口文档: http://${address}:3000/${VIRTUAL_PATH.SWAGGER_DOC}`))
+  console.log(chalk.blue(`SPA 渲染路径: http://${address}:3000/${VIRTUAL_PATH.SPA_RENDER}`))
+  console.log(chalk.blue(`静态资源路径: http://${address}:3000/${VIRTUAL_PATH.STATIC_ASSETS}/upload/日期文件夹/文件名.ext`))
+  console.log('\r\n')
 }
 
 bootstrap().then()
