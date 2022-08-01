@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ExampleCacheController } from './example-cache.controller';
+import { Test, TestingModule } from '@nestjs/testing'
+import { ExampleCacheController } from './example-cache.controller'
 
 describe('ExampleCacheController', () => {
-  let controller: ExampleCacheController;
+  let controller: ExampleCacheController
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ExampleCacheController],
-    }).compile();
+    }).compile()
 
-    controller = module.get<ExampleCacheController>(ExampleCacheController);
-  });
+    controller = module.get<ExampleCacheController>(ExampleCacheController)
+  })
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-});
+    expect(controller).toBeDefined()
+  })
+})

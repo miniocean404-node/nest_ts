@@ -27,6 +27,7 @@ async function bootstrap() {
     defaultVersion: VIRTUAL_PATH.VERSION, // 全局版本 支持三种, '1'、['1', '2']、VERSION_NEUTRAL
   })
 
+  // 开启跨域
   app.enableCors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

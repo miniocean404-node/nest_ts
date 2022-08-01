@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ExampleSerializationController } from './example-serialization.controller';
+import { Test, TestingModule } from '@nestjs/testing'
+import { ExampleSerializationController } from './example-serialization.controller'
 
 describe('ExampleSerializationController', () => {
-  let controller: ExampleSerializationController;
+  let controller: ExampleSerializationController
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ExampleSerializationController],
-    }).compile();
+    }).compile()
 
-    controller = module.get<ExampleSerializationController>(ExampleSerializationController);
-  });
+    controller = module.get<ExampleSerializationController>(ExampleSerializationController)
+  })
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-});
+    expect(controller).toBeDefined()
+  })
+})
