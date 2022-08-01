@@ -64,8 +64,7 @@ const dbConfig = registerAs('db', () => ({
   timezone: 'local',
   // 在与 MySQL 服务器的初始连接期间发生超时之前的毫秒数。
   connectTimeout: 10000,
-  // 在与 MySql 服务器的初始连接期间发生超时前的毫秒数。它不同于connectTimeout它控制 TCP 连接超时，而 connectTimeout 则没有。（默认10000：）
-  acquireTimeout: 10000,
+
   // 允许连接到要求旧（不安全）身份验证方法的 MySQL 实例。(默认: false)
   insecureAuth: false,
   // 当处理数据库中的大数字（BIGINT和DECIMAL列）时，您应该启用此选项（默认值true：）
