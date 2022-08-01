@@ -57,7 +57,7 @@ const dbConfig = registerAs('db', () => ({
   username: 'root',
   password: 'root',
   // 连接的数据库名
-  database: 'user',
+  database: 'nest-dev',
   // 这在 MySQL 的 SQL 级别中称为“排序规则”（如 utf8_general_ci）。如果指定了 SQL 级别的字符集（如 utf8mb4），则使用该字符集的默认排序规则。（默认值：UTF8_GENERAL_CI）。
   charset: 'UTF8_GENERAL_CI',
   //  MySQL 服务器上配置的时区。这用于将服务器日期/时间值类型转换为 JavaScript Date 对象，反之亦然。这可以是local,Z或形式中的偏移量 +HH:MMor -HH:MM。(默认: local)
