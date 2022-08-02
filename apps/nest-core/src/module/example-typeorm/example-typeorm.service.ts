@@ -24,18 +24,25 @@ export class ExampleTypeormService {
       const teacher = new TeacherEntity()
       const student = new StudentEntity()
 
+      // 先存各个表的数据，然后再存储关系
       teacher.name = teacherName
-      teacher.classes = classes
-
       student.name = studentName
-      student.classes = classes
-
       classes.name = className
-
-      await this.dataSource.manager.save(classes)
       await this.dataSource.manager.save(student)
       await this.dataSource.manager.save(teacher)
+      await this.dataSource.manager.save(classes)
 
+      classes.students = [student]
+      classes.teachers = [teacher]
+      await this.dataSource.manager.save(classes)
+
+      teacher.students = [student]
+      teacher.classes = classes
+      await this.dataSource.manager.save(teacher)
+
+      student.classes = classes
+      student.teachers = [teacher]
+      await this.dataSource.manager.save(student)
       return true
     } catch (error) {
       return Promise.reject(error)
