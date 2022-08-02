@@ -1,7 +1,7 @@
 import ClassEntity from '@app/nest-core/db/typeorm-example/class.entity'
 import StudentEntity from '@app/nest-core/db/typeorm-example/student.entity'
 import TeacherEntity from '@app/nest-core/db/typeorm-example/teacher.entity'
-import { SaveStudentDto } from '@app/nest-core/module/example-typeorm/dto/save-student.dto'
+import { SaveStudentDto } from '@app/nest-core/module/example/dto/save-student.dto'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository, DataSource } from 'typeorm'

@@ -21,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import * as Joi from 'joi'
 import { WinstonModule } from 'nest-winston'
 import { AppController } from './app.controller'
-import { ExampleTypeormModule } from './module/example-typeorm/example-typeorm.module'
+import { ExampleTypeormModule } from './module/example/example-typeorm.module'
 
 // 根模块
 @Module({

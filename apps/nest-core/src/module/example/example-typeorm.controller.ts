@@ -1,4 +1,4 @@
-import { ExampleTypeormService } from '@app/nest-core/module/example-typeorm/example-typeorm.service'
+import { ExampleTypeormService } from '@app/nest-core/module/example/example-typeorm.service'
 import { Controller, Get, Query } from '@nestjs/common'
 import { SaveStudentDto } from './dto/save-student.dto'
 
