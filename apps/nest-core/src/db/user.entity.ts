@@ -52,6 +52,7 @@ export class UserEntity {
   @Column('text', { default: null })
   content: string
 
+  // tinyint 小整形 1 个字节
   @Column('tinyint', { default: null })
   type: number
 

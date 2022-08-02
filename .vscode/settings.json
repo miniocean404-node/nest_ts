@@ -1,3 +1,21 @@
 {
-  "cSpell.words": ["nestjs", "Typeorm"]
+  "cSpell.words": [
+    "incrementserialsequenceidentity",
+    "linestring",
+    "longblob",
+    "longtext",
+    "mediumblob",
+    "mediumint",
+    "mediumtext",
+    "multilinestring",
+    "multipoint",
+    "multipolygongeometrycollection",
+    "nestjs",
+    "nvarchar",
+    "tinyblob",
+    "tinyint",
+    "tinytext",
+    "Typeorm",
+    "varbinary"
+  ]
 }
