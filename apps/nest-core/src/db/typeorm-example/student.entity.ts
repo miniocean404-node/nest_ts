@@ -14,6 +14,7 @@ export default class StudentEntity {
   @ManyToMany(() => TeacherEntity)
   teachers: TeacherEntity[]
 
+  // 在数据库中 一对多 多对一的 关系中 多的一方记录 id 信息
   @ManyToOne(() => ClassEntity, (classes) => classes.students)
-  classes: ClassEntity[]
+  classes: ClassEntity
 }

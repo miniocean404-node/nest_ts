@@ -16,7 +16,12 @@ export class ExampleTypeormService {
   ) {}
 
   // 保存学生
-  async saveStudent(req: SaveStudentDto): Promise<boolean> {
+  async saveStudent(req: SaveStudentDto): Promise<boolean | Error> {
+    return false
+  }
+
+  // 保存班级
+  async saveClasses(req: SaveStudentDto): Promise<boolean | Error> {
     const { studentName, className, teacherName } = req
 
     try {
@@ -24,23 +29,17 @@ export class ExampleTypeormService {
       const teacher = new TeacherEntity()
       const student = new StudentEntity()
 
-      classes.name = className
-      classes.teachers = [teacher]
-      classes.students = [student]
-
       teacher.name = teacherName
-      teacher.students = [student]
-      teacher.classes = [classes]
+      teacher.classes = classes
 
       student.name = studentName
-      student.classes = [classes]
-      student.teachers = [teacher]
+      student.classes = classes
 
-      console.log(classes, teacher, student)
+      classes.name = className
 
-      await this.dataSource.manager.save(teacher)
-      await this.dataSource.manager.save(student)
       await this.dataSource.manager.save(classes)
+      await this.dataSource.manager.save(student)
+      await this.dataSource.manager.save(teacher)
 
       return true
     } catch (error) {
