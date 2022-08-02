@@ -6,8 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "start-core:dev": "set NODE_ENV=development && nest start --watch",
-    "start-microservices:dev": "set NODE_ENV=development && nest start nest-microservices --watch",
+    "start-core:dev": "cross-env NODE_ENV=development && nest start --watch",
+    "start-microservices:dev": "cross-env NODE_ENV=development && nest start nest-microservices --watch",
     "build-core": "nest build",
     "build-microservices": "nest build nest-microservices",
     "start:debug": "nest start --debug --watch",
@@ -100,6 +100,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
+    "cross-env": "^7.0.3",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
