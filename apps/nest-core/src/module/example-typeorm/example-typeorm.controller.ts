@@ -6,11 +6,6 @@ import { SaveStudentDto } from './dto/save-student.dto'
 export class ExampleTypeormController {
   constructor(private exampleTypeormService: ExampleTypeormService) {}
 
-  @Get('save-student')
-  async saveStudent(@Query() req: SaveStudentDto) {
-    return { data: null }
-  }
-
   @Get('save-classes')
   async saveClasses(@Query() req: SaveStudentDto) {
     try {
@@ -21,5 +16,11 @@ export class ExampleTypeormController {
         return { msg: error.message, code: 400 }
       }
     }
+  }
+  @Get('get-classes')
+  async getClasses(@Query() req: any) {
+    const res = await this.exampleTypeormService.getClasses()
+
+    return { data: res }
   }
 }

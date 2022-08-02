@@ -15,11 +15,6 @@ export class ExampleTypeormService {
     private readonly dataSource: DataSource
   ) {}
 
-  // 保存学生
-  async saveStudent(req: SaveStudentDto): Promise<boolean | Error> {
-    return false
-  }
-
   // 保存班级
   async saveClasses(req: SaveStudentDto): Promise<boolean | Error> {
     const { studentName, className, teacherName } = req
@@ -45,5 +40,19 @@ export class ExampleTypeormService {
     } catch (error) {
       return Promise.reject(error)
     }
+  }
+
+  async getClasses() {
+    const res = await this.studentRep.find({
+      relations: {
+        teachers: true,
+        classes: true,
+      },
+      where: {
+        name: '学生1',
+      },
+    })
+
+    return res
   }
 }
