@@ -13,7 +13,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "target": "es2017",
+    "target": "ESNext",
     "sourceMap": true,
     "incremental": true,
     "skipLibCheck": true,
