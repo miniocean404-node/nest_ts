@@ -15,7 +15,7 @@ export class ExampleCacheController {
   @UseInterceptors(CacheInterceptor)
   async cache() {
     // ttl 过期时间 永不过期，ttl 为 0
-    await this.cacheManager.set('key', 'value', { ttl: 1000 })
+    await this.cacheManager.set('key', 'value', 1000)
     const value = await this.cacheManager.get('key')
 
     await this.cacheManager.del('key')
